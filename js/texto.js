@@ -78,17 +78,30 @@
     var frag = document.createDocumentFragment();
     var n = 0;
 
+    // las letras van agrupadas por palabra (.pal): la l\u00EDnea solo puede
+    // cortarse en los espacios, nunca a mitad de una palabra
+    var pal = null;
     for (var i = 0; i < texto.length; i++) {
       var c = texto.charAt(i);
+      if (c === " ") {
+        pal = null;
+        frag.appendChild(document.createTextNode(" "));
+        continue;
+      }
+      if (!pal) {
+        pal = document.createElement("span");
+        pal.className = "pal";
+        frag.appendChild(pal);
+      }
       var s = document.createElement("span");
       s.className = "ltr";
-      s.textContent = c === " " ? "\u00A0" : c;
-      if (c !== " ") s.setAttribute("data-c", c);
+      s.textContent = c;
+      s.setAttribute("data-c", c);
       s.style.transitionDelay = (retraso + n * paso) + "ms";
       s.style.setProperty("--i", n);
-      if (degradado && c !== " ") s.style.color = colorEn(n / ((total - 1) || 1), enClaro);
-      if (c !== " ") n++;
-      frag.appendChild(s);
+      if (degradado) s.style.color = colorEn(n / ((total - 1) || 1), enClaro);
+      n++;
+      pal.appendChild(s);
     }
     el.textContent = "";
     el.appendChild(frag);

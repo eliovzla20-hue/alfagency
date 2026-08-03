@@ -119,6 +119,23 @@
     verPaso(0);
   }
 
+  /* ---------- menú móvil ---------- */
+  var nav = document.getElementById("nav");
+  var burger = document.querySelector(".burger");
+  if (nav && burger) {
+    burger.addEventListener("click", function () {
+      var abierto = nav.classList.toggle("abierta");
+      burger.setAttribute("aria-expanded", abierto ? "true" : "false");
+    });
+    // al elegir un destino, el panel se recoge solo
+    document.querySelectorAll("#menuPanel a").forEach(function (a) {
+      a.addEventListener("click", function () {
+        nav.classList.remove("abierta");
+        burger.setAttribute("aria-expanded", "false");
+      });
+    });
+  }
+
   var yr = document.getElementById("yr");
   if (yr) yr.textContent = new Date().getFullYear();
 })();

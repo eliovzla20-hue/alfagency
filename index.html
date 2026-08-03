@@ -105,6 +105,27 @@ a{color:inherit;text-decoration:none}
 .burger i{display:block;width:17px;height:1.5px;background:#fff;position:relative}
 .burger i::before,.burger i::after{content:"";position:absolute;left:0;width:17px;height:1.5px;background:#fff}
 .burger i::before{top:-5px}.burger i::after{top:5px}
+.burger i,.burger i::before,.burger i::after{transition:transform .3s ease,background .3s ease}
+
+/* panel del menú en pantallas chicas */
+.menu-panel{
+  position:absolute;top:var(--nav-h);left:0;right:0;
+  display:flex;flex-direction:column;
+  padding:.4rem 4vw 1.5rem;
+  background:rgba(0,4,15,.97);border-bottom:1px solid rgba(255,255,255,.08);
+  opacity:0;visibility:hidden;transform:translateY(-10px);
+  transition:opacity .3s ease,transform .3s ease,visibility 0s linear .3s;
+}
+.nav.abierta{background:rgba(0,4,15,.97)}
+.nav.abierta .menu-panel{opacity:1;visibility:visible;transform:none;transition:opacity .3s ease,transform .3s ease}
+.menu-panel a{padding:.95rem 0;font-size:.95rem;letter-spacing:.02em;color:rgba(255,255,255,.75);border-bottom:1px solid rgba(255,255,255,.06)}
+.menu-panel a:hover,.menu-panel a:active{color:#fff}
+.menu-panel .btn-wa{margin-top:1.2rem;justify-content:center;color:#04240f;border-bottom:none}
+@media(min-width:960px){.menu-panel{display:none}}
+/* la hamburguesa se convierte en X */
+.nav.abierta .burger i{background:transparent}
+.nav.abierta .burger i::before{transform:translateY(5px) rotate(45deg)}
+.nav.abierta .burger i::after{transform:translateY(-5px) rotate(-45deg)}
 
 /* ---------- hero ---------- */
 .hero{
@@ -273,6 +294,8 @@ a{color:inherit;text-decoration:none}
   transition:opacity .42s cubic-bezier(.22,1,.36,1),transform .42s cubic-bezier(.22,1,.36,1);
 }
 .visible .ltr,.entra .ltr{opacity:1;filter:blur(0);transform:none}
+/* cada palabra es un bloque indivisible: sin esto la línea se corta entre letras */
+.pal{display:inline-block;white-space:nowrap}
 .perspectiva{perspective:900px}
 
 /* texto que se decodifica: ancho estable para que no salte */
@@ -720,7 +743,15 @@ a{color:inherit;text-decoration:none}
       <li><a href="#proceso">Proceso</a></li>
     </ul>
     <a class="btn btn-wa" href="https://wa.me/584245040868" target="_blank" rel="noopener">Hablemos</a>
-    <button class="burger" aria-label="Menú"><i></i></button>
+    <button class="burger" aria-label="Menú" aria-expanded="false" aria-controls="menuPanel"><i></i></button>
+  </div>
+  <div class="menu-panel" id="menuPanel">
+    <a href="#inicio">Inicio</a>
+    <a href="#nosotros">Nosotros</a>
+    <a href="#servicios">Servicios</a>
+    <a href="#casos">Casos</a>
+    <a href="#proceso">Proceso</a>
+    <a class="btn btn-wa" href="https://wa.me/584245040868" target="_blank" rel="noopener">Hablemos</a>
   </div>
 </nav>
 
@@ -1091,8 +1122,8 @@ a{color:inherit;text-decoration:none}
   }
 })();
 </script>
-<script src="js/texto.js?v=4"></script>
-<script src="js/ui.js?v=4"></script>
+<script src="js/texto.js?v=5"></script>
+<script src="js/ui.js?v=5"></script>
 <script src="js/recorrido.js?v=4"></script>
 
 </body>
