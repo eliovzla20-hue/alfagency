@@ -108,22 +108,24 @@ a{color:inherit;text-decoration:none}
 .burger i,.burger i::before,.burger i::after{transition:transform .3s ease,background .3s ease}
 
 /* panel del menú en pantallas chicas: cortina lateral desde la derecha */
-.nav .wrap{position:relative;z-index:2}
+.nav .wrap{position:relative;z-index:3}
 .menu-panel{
-  position:fixed;top:0;right:0;bottom:0;z-index:1;
+  position:fixed;top:0;right:0;bottom:0;z-index:2;
   width:min(320px,82vw);
   display:flex;flex-direction:column;
   padding:calc(var(--nav-h) + 1.2rem) clamp(1.5rem,6vw,2.2rem) 2rem;
-  background:rgba(0,4,15,.97);border-left:1px solid rgba(255,255,255,.08);
+  background:#00040f;border-left:1px solid rgba(255,255,255,.1);
   transform:translateX(100%);visibility:hidden;
   transition:transform .38s cubic-bezier(.22,1,.36,1),visibility 0s linear .38s;
 }
-.nav.abierta{background:rgba(0,4,15,.97)}
+.nav.abierta{background:#00040f}
 .nav.abierta .menu-panel{transform:none;visibility:visible;transition:transform .38s cubic-bezier(.22,1,.36,1)}
+/* con el menú abierto, en la barra solo quedan el logo y la X */
+.nav.abierta .wrap .btn-wa{opacity:0;pointer-events:none;transition:opacity .25s ease}
 /* fondo oscurecido tras el panel: tocarlo también cierra el menú */
 .menu-fondo{
-  position:fixed;inset:0;z-index:0;
-  background:rgba(0,2,8,.55);
+  position:fixed;top:0;left:0;right:0;bottom:0;z-index:1;
+  background:rgba(0,2,8,.72);
   opacity:0;visibility:hidden;
   transition:opacity .38s ease,visibility 0s linear .38s;
 }
