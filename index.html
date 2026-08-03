@@ -107,21 +107,31 @@ a{color:inherit;text-decoration:none}
 .burger i::before{top:-5px}.burger i::after{top:5px}
 .burger i,.burger i::before,.burger i::after{transition:transform .3s ease,background .3s ease}
 
-/* panel del menú en pantallas chicas */
+/* panel del menú en pantallas chicas: cortina lateral desde la derecha */
+.nav .wrap{position:relative;z-index:2}
 .menu-panel{
-  position:absolute;top:var(--nav-h);left:0;right:0;
+  position:fixed;top:0;right:0;bottom:0;z-index:1;
+  width:min(320px,82vw);
   display:flex;flex-direction:column;
-  padding:.4rem 4vw 1.5rem;
-  background:rgba(0,4,15,.97);border-bottom:1px solid rgba(255,255,255,.08);
-  opacity:0;visibility:hidden;transform:translateY(-10px);
-  transition:opacity .3s ease,transform .3s ease,visibility 0s linear .3s;
+  padding:calc(var(--nav-h) + 1.2rem) clamp(1.5rem,6vw,2.2rem) 2rem;
+  background:rgba(0,4,15,.97);border-left:1px solid rgba(255,255,255,.08);
+  transform:translateX(100%);visibility:hidden;
+  transition:transform .38s cubic-bezier(.22,1,.36,1),visibility 0s linear .38s;
 }
 .nav.abierta{background:rgba(0,4,15,.97)}
-.nav.abierta .menu-panel{opacity:1;visibility:visible;transform:none;transition:opacity .3s ease,transform .3s ease}
-.menu-panel a{padding:.95rem 0;font-size:.95rem;letter-spacing:.02em;color:rgba(255,255,255,.75);border-bottom:1px solid rgba(255,255,255,.06)}
+.nav.abierta .menu-panel{transform:none;visibility:visible;transition:transform .38s cubic-bezier(.22,1,.36,1)}
+/* fondo oscurecido tras el panel: tocarlo también cierra el menú */
+.menu-fondo{
+  position:fixed;inset:0;z-index:0;
+  background:rgba(0,2,8,.55);
+  opacity:0;visibility:hidden;
+  transition:opacity .38s ease,visibility 0s linear .38s;
+}
+.nav.abierta .menu-fondo{opacity:1;visibility:visible;transition:opacity .38s ease}
+.menu-panel a{padding:1rem 0;font-size:1rem;letter-spacing:.02em;color:rgba(255,255,255,.75);border-bottom:1px solid rgba(255,255,255,.06)}
 .menu-panel a:hover,.menu-panel a:active{color:#fff}
-.menu-panel .btn-wa{margin-top:1.2rem;justify-content:center;color:#04240f;border-bottom:none}
-@media(min-width:960px){.menu-panel{display:none}}
+.menu-panel .btn-wa{margin-top:auto;justify-content:center;color:#04240f;border-bottom:none}
+@media(min-width:960px){.menu-panel,.menu-fondo{display:none}}
 /* la hamburguesa se convierte en X */
 .nav.abierta .burger i{background:transparent}
 .nav.abierta .burger i::before{transform:translateY(5px) rotate(45deg)}
@@ -745,6 +755,7 @@ a{color:inherit;text-decoration:none}
     <a class="btn btn-wa" href="https://wa.me/584245040868" target="_blank" rel="noopener">Hablemos</a>
     <button class="burger" aria-label="Menú" aria-expanded="false" aria-controls="menuPanel"><i></i></button>
   </div>
+  <div class="menu-fondo" id="menuFondo"></div>
   <div class="menu-panel" id="menuPanel">
     <a href="#inicio">Inicio</a>
     <a href="#nosotros">Nosotros</a>
@@ -1123,7 +1134,7 @@ a{color:inherit;text-decoration:none}
 })();
 </script>
 <script src="js/texto.js?v=5"></script>
-<script src="js/ui.js?v=5"></script>
+<script src="js/ui.js?v=6"></script>
 <script src="js/recorrido.js?v=4"></script>
 
 </body>

@@ -123,17 +123,20 @@
   var nav = document.getElementById("nav");
   var burger = document.querySelector(".burger");
   if (nav && burger) {
+    function cerrarMenu() {
+      nav.classList.remove("abierta");
+      burger.setAttribute("aria-expanded", "false");
+    }
     burger.addEventListener("click", function () {
       var abierto = nav.classList.toggle("abierta");
       burger.setAttribute("aria-expanded", abierto ? "true" : "false");
     });
-    // al elegir un destino, el panel se recoge solo
+    // la cortina se recoge al elegir un destino o al tocar fuera de ella
     document.querySelectorAll("#menuPanel a").forEach(function (a) {
-      a.addEventListener("click", function () {
-        nav.classList.remove("abierta");
-        burger.setAttribute("aria-expanded", "false");
-      });
+      a.addEventListener("click", cerrarMenu);
     });
+    var fondo = document.getElementById("menuFondo");
+    if (fondo) fondo.addEventListener("click", cerrarMenu);
   }
 
   var yr = document.getElementById("yr");
