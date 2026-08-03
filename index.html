@@ -1,0 +1,1099 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Alfa Agency · Guiar y potenciar tu futuro</title>
+<meta name="description" content="Agencia creativa venezolana. Marketing, social media, identidad visual, páginas web y software para negocios.">
+<meta name="theme-color" content="#00040f">
+<link rel="icon" href="img/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,900;1,900&display=swap" rel="stylesheet">
+<style>
+:root{
+  /* paleta oficial del brandbook */
+  --dark-blue:#002063;
+  --king-blue:#003d91;
+  --light-blue:#209ff4;
+  --negro:#00040f;
+  --wa:#25d366;
+  --tipo:'Poppins',system-ui,-apple-system,sans-serif;
+  --nav-h:78px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  font-family:var(--tipo);background:var(--negro);color:#fff;
+  font-weight:300;line-height:1.6;overflow-x:hidden;
+}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+.wrap{width:min(1280px,90vw);margin-inline:auto}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+
+/* ---------- fondo del hero: sobrio, sin animación ---------- */
+.hero{
+  background:
+    radial-gradient(58% 46% at 78% 12%, rgba(32,159,244,.16), transparent 64%),
+    radial-gradient(52% 50% at 12% 88%, rgba(0,61,145,.32), transparent 68%),
+    linear-gradient(168deg, #041027 0%, #010916 62%, var(--negro) 100%);
+}
+.hero::before{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background-image:
+    linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);
+  background-size:76px 76px;
+  mask-image:radial-gradient(circle at 50% 40%,#000 12%,transparent 72%);
+}
+
+/* ---------- precarga ---------- */
+.pre{
+  position:fixed;inset:0;z-index:100;background:var(--negro);
+  display:grid;place-items:center;
+  transition:opacity .8s cubic-bezier(.4,0,.2,1),visibility .8s;
+}
+.pre.fuera{opacity:0;visibility:hidden}
+.pre-in{display:grid;place-items:center;gap:2.2rem}
+.pre-a{
+  width:clamp(58px,8vw,86px);opacity:0;transform:scale(.82);
+  filter:blur(14px);
+  animation:aEntra 1.1s cubic-bezier(.2,.7,.3,1) .1s forwards;
+}
+@keyframes aEntra{to{opacity:1;transform:none;filter:blur(0)}}
+.pre-num{
+  font-weight:300;font-size:.82rem;letter-spacing:.42em;color:rgba(255,255,255,.55);
+  font-variant-numeric:tabular-nums;
+}
+.pre-barra{width:min(220px,42vw);height:1px;background:rgba(255,255,255,.16);overflow:hidden}
+.pre-barra i{display:block;height:100%;width:0;background:var(--light-blue)}
+
+/* ---------- navegación ---------- */
+.nav{
+  position:fixed;inset:0 0 auto;z-index:60;height:var(--nav-h);display:flex;align-items:center;
+  transition:background .45s,border-color .45s;
+  border-bottom:1px solid transparent;
+}
+.nav.solida{background:rgba(0,4,15,.93);border-bottom-color:rgba(255,255,255,.08)}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:1.5rem;width:min(1280px,92vw)}
+.nav .logo img{height:32px;width:auto;filter:brightness(0) invert(1)}
+.nav .links{display:none;gap:2.2rem;list-style:none}
+@media(min-width:960px){.nav .links{display:flex}}
+.nav .links a{
+  font-size:.8rem;font-weight:400;letter-spacing:.03em;color:rgba(255,255,255,.66);
+  position:relative;padding:.3rem 0;transition:color .3s;
+}
+.nav .links a::after{content:"";position:absolute;left:0;bottom:0;height:1px;width:0;background:var(--light-blue);transition:width .4s cubic-bezier(.2,.7,.3,1)}
+.nav .links a:hover{color:#fff}
+.nav .links a:hover::after{width:100%}
+.btn{
+  display:inline-flex;align-items:center;gap:.55rem;white-space:nowrap;
+  font-size:.82rem;font-weight:600;letter-spacing:.02em;
+  padding:.8rem 1.45rem;border-radius:999px;border:1px solid transparent;cursor:pointer;
+  transition:background .35s,color .35s,border-color .35s,transform .35s,box-shadow .35s;
+}
+.btn svg{width:16px;height:16px;flex:none;fill:currentColor}
+.btn-wa{background:var(--wa);color:#04240f;box-shadow:0 10px 34px rgba(37,211,102,.3)}
+.btn-wa:hover{background:#31e675;transform:translateY(-2px);box-shadow:0 16px 46px rgba(37,211,102,.48)}
+.btn-vidrio{
+  border-color:rgba(255,255,255,.26);color:#fff;background:rgba(255,255,255,.08);
+}
+.btn-vidrio:hover{background:rgba(255,255,255,.14);border-color:rgba(255,255,255,.5);transform:translateY(-2px)}
+.burger{display:grid;place-items:center;width:44px;height:44px;background:none;border:1px solid rgba(255,255,255,.22);border-radius:12px;cursor:pointer}
+@media(min-width:960px){.burger{display:none}}
+.burger i{display:block;width:17px;height:1.5px;background:#fff;position:relative}
+.burger i::before,.burger i::after{content:"";position:absolute;left:0;width:17px;height:1.5px;background:#fff}
+.burger i::before{top:-5px}.burger i::after{top:5px}
+
+/* ---------- hero ---------- */
+.hero{
+  position:relative;z-index:2;min-height:100svh;display:flex;flex-direction:column;
+  justify-content:space-between;padding:calc(var(--nav-h) + 1rem) 0 0;
+}
+.hero-mid{flex:1;display:flex;flex-direction:column;justify-content:center;padding:clamp(1.5rem,4vw,3rem) 0}
+.kicker{
+  display:inline-flex;align-items:center;gap:.6rem;align-self:flex-start;
+  font-size:.68rem;font-weight:500;letter-spacing:.24em;text-transform:uppercase;color:rgba(255,255,255,.8);
+  border:1px solid rgba(255,255,255,.2);border-radius:999px;padding:.5rem 1.05rem;
+  background:rgba(255,255,255,.07);
+  margin-bottom:clamp(1.2rem,2.6vw,1.9rem);
+}
+.kicker::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--light-blue);box-shadow:0 0 0 4px rgba(32,159,244,.22)}
+
+/* título con revelado línea por línea */
+.titulo{font-weight:900;line-height:.88;letter-spacing:-.045em;text-transform:uppercase}
+/* con letras animadas la línea no necesita máscara: dejamos aire para el giro */
+.linea{display:block;overflow:visible;padding-bottom:.06em}
+.linea > span{display:block;font-size:clamp(2.9rem,11.2vw,9.4rem)}
+.titulo .destello{
+  background:linear-gradient(96deg,#ffffff 22%,#9fd4fb 58%,var(--light-blue) 100%);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+/* al partirse en letras, cada una lleva ya su color: se retira el recorte */
+.destello.grad-listo{background:none;-webkit-background-clip:border-box;background-clip:border-box;color:inherit}
+.hero-sub{
+  margin-top:clamp(1.3rem,2.6vw,2rem);font-size:clamp(1rem,1.55vw,1.22rem);
+  color:rgba(255,255,255,.82);max-width:44ch;line-height:1.6;font-weight:300;
+}
+.hero-sub b{font-weight:600;color:#fff}
+.hero-cta{display:flex;gap:.75rem;flex-wrap:wrap;margin-top:clamp(1.6rem,3vw,2.3rem)}
+/* aparición escalonada de los bloques del hero */
+.sube{opacity:0;transform:translateY(20px);transition:opacity .6s cubic-bezier(.22,1,.36,1),transform .6s cubic-bezier(.22,1,.36,1)}
+.entra .sube{opacity:1;transform:none}
+.entra .kicker{transition-delay:.05s}
+.entra .hero-sub{transition-delay:.2s}
+.entra .hero-cta{transition-delay:.28s}
+.entra .hero-pie{transition-delay:.36s}
+
+/* pie del hero */
+.hero-pie{border-top:1px solid rgba(255,255,255,.12);padding:1.3rem 0 1.6rem}
+.hero-pie .fila{display:flex;gap:2rem 3rem;flex-wrap:wrap;align-items:flex-end;justify-content:space-between}
+.dato{font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.5)}
+.dato b{display:block;font-size:1.5rem;font-weight:900;color:#fff;letter-spacing:-.02em;margin-top:.3rem;text-transform:none}
+.dato.chico b{font-size:.95rem;font-weight:600;letter-spacing:.02em;text-transform:uppercase}
+.cue{display:flex;align-items:center;gap:.6rem;font-size:.64rem;letter-spacing:.24em;text-transform:uppercase;color:var(--light-blue)}
+.cue i{display:block;width:32px;height:1px;background:var(--light-blue);transform-origin:left;animation:cue 2.4s ease-in-out infinite}
+@keyframes cue{0%,100%{transform:scaleX(.28);opacity:.5}50%{transform:scaleX(1);opacity:1}}
+
+/* =========== secciones: alternan claro y oscuro =========== */
+.seccion{position:relative;z-index:2;background:var(--negro)}
+.seccion.clara{
+  background:linear-gradient(180deg,#f6f8fc 0%,#eef2f9 100%);
+  color:#0a1a33;
+}
+.seccion.oscura{
+  background:linear-gradient(180deg,#02091a 0%,#04122c 55%,#02091a 100%);
+}
+.seccion.oscura::before{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(52% 42% at 88% 8%, rgba(0,61,145,.30), transparent 66%),
+             radial-gradient(46% 40% at 6% 92%, rgba(32,159,244,.12), transparent 70%);
+}
+.seccion > *{position:relative;z-index:1}
+.respiro{display:none}
+
+/* colores de texto en las secciones claras */
+.clara .h2{color:#061529}
+.clara .lead,.clara .nos-grid p{color:#465a7a}
+.clara .eyebrow{color:var(--king-blue)}
+.clara .frase{border-color:rgba(10,26,51,.14)}
+.clara .frase p{color:#0a1a33}
+.clara .frase b{color:#04101f}
+.clara .frase span{color:var(--king-blue)}
+.clara .pilar{
+  background:#fff;border-color:rgba(10,26,51,.1);
+  box-shadow:0 18px 40px -24px rgba(6,21,41,.35);
+}
+.clara .pilar h4{color:#061529}
+.clara .pilar p{color:#4d6182}
+.clara .pilar::after{background:radial-gradient(60% 60% at 50% 0%,rgba(32,159,244,.12),transparent 70%)}
+.clara .caso{
+  background:#fff;border-color:rgba(10,26,51,.1);
+  box-shadow:0 14px 28px -16px rgba(6,21,41,.36);
+}
+.clara .caso-txt h3{color:#061529}
+.clara .caso-txt p{color:#4d6182}
+.clara .caso-txt .logro{color:var(--king-blue)}
+.clara .caso-txt .cat{color:var(--king-blue)}
+
+.eyebrow{font-size:.68rem;font-weight:600;letter-spacing:.26em;text-transform:uppercase;color:var(--light-blue)}
+.h2{
+  font-weight:900;font-size:clamp(1.9rem,5.6vw,4rem);line-height:.98;letter-spacing:-.035em;
+  margin-top:1.1rem;text-transform:uppercase;
+}
+.h2 em{font-style:normal;background:linear-gradient(96deg,#fff 20%,#9fd4fb 60%,var(--light-blue) 100%);
+  -webkit-background-clip:text;background-clip:text;color:transparent}
+.h2 em.grad-listo{background:none;-webkit-background-clip:border-box;background-clip:border-box;color:inherit}
+
+/* ---------- nosotros ---------- */
+.nosotros{padding:clamp(4.5rem,11vw,9rem) 0 clamp(5rem,12vw,10rem)}
+.nos-grid{display:grid;gap:clamp(1.8rem,4vw,4rem);margin-top:clamp(2rem,5vw,3.4rem)}
+@media(min-width:900px){.nos-grid{grid-template-columns:1.15fr 1fr;align-items:start}}
+.nos-grid p{color:rgba(255,255,255,.72);font-size:clamp(1rem,1.5vw,1.12rem);line-height:1.75}
+.nos-grid p + p{margin-top:1.1rem}
+
+/* frase del brandbook */
+.frase{
+  margin-top:clamp(3rem,7vw,5rem);padding:clamp(1.6rem,4vw,2.6rem) 0;
+  border-top:1px solid rgba(255,255,255,.12);border-bottom:1px solid rgba(255,255,255,.12);
+}
+.frase p{font-size:clamp(1.15rem,2.6vw,1.9rem);font-weight:300;line-height:1.35;max-width:26ch}
+.frase b{font-weight:600;color:#fff}
+.frase span{color:var(--light-blue)}
+
+/* pilares: piezas flotando en el vacío */
+.pilares{display:grid;gap:1.2rem;margin-top:clamp(2.5rem,6vw,4rem);perspective:1100px}
+@media(min-width:820px){.pilares{grid-template-columns:repeat(3,1fr)}}
+.pilar{
+  position:relative;border:1px solid rgba(255,255,255,.12);border-radius:22px;
+  padding:clamp(1.5rem,3vw,2.1rem);
+  background:linear-gradient(158deg,rgba(4,16,44,.72),rgba(2,10,30,.55));
+  transform-style:preserve-3d;
+  box-shadow:0 14px 28px -16px rgba(0,0,0,.85), 0 0 0 0 rgba(32,159,244,0);
+  transition:border-color .5s,box-shadow .6s,background .5s;
+}
+
+/* halo inferior: la pieza proyecta luz sobre el vacío */
+.pilar::after{
+  content:"";position:absolute;left:12%;right:12%;bottom:-26px;height:26px;border-radius:50%;
+  background:radial-gradient(50% 100% at 50% 0%,rgba(32,159,244,.30),transparent 72%);
+  filter:blur(9px);opacity:.5;transition:opacity .6s;pointer-events:none;
+}
+.pilar:hover{
+  border-color:rgba(32,159,244,.55);
+  box-shadow:0 18px 34px -18px rgba(0,0,0,.9), 0 0 18px -6px rgba(32,159,244,.3);
+}
+.pilar:hover::after{opacity:1}
+/* la inclinación la aplica el JS con --rx / --ry */
+.pilar.inclina{
+  transform:translateY(var(--fy,0px)) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));
+  transition:transform .25s cubic-bezier(.2,.7,.3,1),border-color .5s,box-shadow .6s;
+}
+/* brillo que sigue al puntero sobre la superficie */
+.pilar .lustre{
+  position:absolute;inset:0;border-radius:22px;pointer-events:none;opacity:0;
+  background:radial-gradient(220px 220px at var(--mx,50%) var(--my,0%),rgba(32,159,244,.20),transparent 70%);
+  transition:opacity .45s;
+}
+.pilar:hover .lustre{opacity:1}
+.pilar .num{
+  font-size:.72rem;font-weight:600;letter-spacing:.2em;color:var(--light-blue);
+  display:flex;align-items:center;gap:.6rem;
+}
+.pilar .num::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,rgba(32,159,244,.5),transparent)}
+.pilar h4{font-size:clamp(1.05rem,2vw,1.25rem);font-weight:600;margin:1.4rem 0 .6rem}
+.pilar p{font-size:.94rem;color:rgba(255,255,255,.66);line-height:1.65}
+
+/* ---------- efectos de texto ---------- */
+/* letra por letra, con desenfoque y giro en el eje X */
+.ltr{
+  display:inline-block;opacity:0;
+  transform:translateY(.34em);
+  transition:opacity .42s cubic-bezier(.22,1,.36,1),transform .42s cubic-bezier(.22,1,.36,1);
+}
+.visible .ltr,.entra .ltr{opacity:1;filter:blur(0);transform:none}
+.perspectiva{perspective:900px}
+
+/* texto que se decodifica: ancho estable para que no salte */
+[data-decodificar]{font-variant-numeric:tabular-nums}
+
+/* rejilla técnica de fondo */
+
+
+/* línea que se dibuja bajo el número */
+.pilar .num::after{transform:scaleX(0);transform-origin:left;transition:transform 1s cubic-bezier(.16,1,.3,1) .35s}
+.visible .pilar .num::after{transform:scaleX(1)}
+
+/* revelado por línea reutilizable (los títulos con letras usan .ltr) */
+.rev{display:block;overflow:visible;padding-bottom:.04em}
+.rev > span{display:block}
+.sube-al-ver{opacity:0;transform:translateY(20px);transition:opacity .55s cubic-bezier(.22,1,.36,1),transform .55s cubic-bezier(.22,1,.36,1)}
+.visible .sube-al-ver{opacity:1;transform:none}
+
+@media(prefers-reduced-motion:reduce){
+  .linea > span,.sube{transition:none;transform:none;opacity:1}
+  .pre-a{animation:none;opacity:1;filter:none;transform:none}
+  .cue i{animation:none}
+}
+
+/* ================= texto de apoyo ================= */
+.lead{margin-top:1.5rem;max-width:58ch;color:rgba(255,255,255,.72);font-size:clamp(1rem,1.5vw,1.12rem);line-height:1.7}
+
+/* ================= SERVICIOS ================= */
+.servicios{padding:clamp(4.5rem,11vw,9rem) 0 clamp(5rem,12vw,10rem)}
+.svc-tabs{display:grid;grid-template-columns:repeat(2,1fr);gap:.7rem;margin-top:clamp(2rem,5vw,3.2rem)}
+@media(min-width:460px){.svc-tabs{grid-template-columns:repeat(4,1fr)}}
+@media(min-width:1040px){.svc-tabs{grid-template-columns:repeat(8,1fr)}}
+.svc-tab{
+  display:flex;flex-direction:column;align-items:center;gap:.7rem;text-align:center;cursor:pointer;
+  border:1px solid rgba(255,255,255,.12);border-radius:18px;padding:1rem .55rem;
+  background:linear-gradient(158deg,rgba(4,16,44,.7),rgba(2,10,30,.52));
+  color:rgba(255,255,255,.6);font-family:var(--tipo);font-size:.7rem;font-weight:500;line-height:1.25;
+  transition:border-color .4s,background .4s,color .4s,transform .4s cubic-bezier(.16,1,.3,1),box-shadow .4s;
+}
+.svc-tab:hover{border-color:rgba(255,255,255,.4);color:#fff;transform:translateY(-4px)}
+.svc-tab .ic{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;flex:none;background:rgba(255,255,255,.08);transition:background .4s,color .4s}
+.svc-tab .ic svg{width:19px;height:19px;stroke:currentColor;fill:none;stroke-width:1.6}
+.svc-tab.on{
+  border-color:var(--light-blue);color:#fff;
+  background:linear-gradient(158deg,rgba(32,159,244,.22),rgba(0,61,145,.12));
+  box-shadow:0 18px 44px -12px rgba(32,159,244,.5);
+}
+.svc-tab.on .ic{background:var(--king-blue);color:#fff}
+
+.svc-panel{
+  margin-top:1rem;border:1px solid rgba(255,255,255,.14);border-radius:24px;overflow:hidden;display:grid;
+  background:linear-gradient(158deg,rgba(4,16,44,.68),rgba(2,10,30,.5));
+  box-shadow:0 18px 38px -20px rgba(0,0,0,.9);
+}
+@media(min-width:900px){.svc-panel{grid-template-columns:1fr 1fr}}
+.svc-visual{position:relative;min-height:clamp(210px,27vw,340px);overflow:hidden;background:rgba(0,10,30,.5)}
+.svc-visual img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;animation:fundir .55s cubic-bezier(.16,1,.3,1)}
+@keyframes fundir{from{opacity:0;transform:scale(1.03)}to{opacity:1;transform:none}}
+.svc-body{padding:clamp(1.6rem,3.5vw,2.4rem)}
+.svc-body .tag{font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;color:var(--light-blue);font-weight:600}
+.svc-body h3{font-size:clamp(1.35rem,3vw,1.95rem);font-weight:900;margin:.75rem 0 1rem;letter-spacing:-.02em}
+.svc-body p{font-size:.96rem;color:rgba(255,255,255,.72);line-height:1.75;margin-bottom:1.8rem}
+
+/* ================= CASOS ================= */
+.casos{padding:clamp(4.5rem,11vw,9rem) 0 clamp(5rem,12vw,10rem)}
+.casos-grid{display:grid;gap:1.3rem;margin-top:clamp(2.2rem,5vw,3.4rem);perspective:1200px}
+@media(min-width:900px){.casos-grid{grid-template-columns:1fr 1fr}.caso.principal{grid-column:1/-1;display:grid;grid-template-columns:1.15fr 1fr;align-items:stretch}}
+.caso{
+  position:relative;border:1px solid rgba(255,255,255,.12);border-radius:24px;overflow:hidden;
+  background:linear-gradient(158deg,rgba(4,16,44,.68),rgba(2,10,30,.5));
+  box-shadow:0 16px 32px -18px rgba(0,0,0,.9);
+  transition:border-color .5s,box-shadow .5s,transform .5s cubic-bezier(.16,1,.3,1);
+}
+.caso:hover{border-color:rgba(32,159,244,.5);box-shadow:0 20px 38px -20px rgba(0,0,0,.9),0 0 20px -8px rgba(32,159,244,.28);transform:translateY(-5px)}
+.caso .lustre{position:absolute;inset:0;border-radius:24px;pointer-events:none;opacity:0;z-index:3;
+  background:radial-gradient(240px 240px at var(--mx,50%) var(--my,0%),rgba(32,159,244,.16),transparent 70%);transition:opacity .45s}
+.caso:hover .lustre{opacity:1}
+.caso-art{position:relative;min-height:200px;overflow:hidden;background:#00061a}
+.caso-art > img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0}
+.caso-art .marca{
+  position:absolute;left:1.1rem;bottom:1rem;z-index:3;
+  display:inline-flex;align-items:center;
+  background:var(--king-blue);color:#fff;
+  font-size:clamp(.74rem,1.05vw,.88rem);font-weight:600;letter-spacing:.01em;
+  line-height:1.2;padding:.52rem 1.05rem;border-radius:999px;
+  box-shadow:0 10px 26px rgba(0,20,60,.45), 0 0 0 1px rgba(255,255,255,.14);
+  text-shadow:none;text-transform:none;
+}
+.caso-art::after{content:"";position:absolute;inset:0;z-index:2;background:linear-gradient(180deg,transparent 55%,rgba(0,6,20,.45));transition:opacity .5s}
+.caso:hover .caso-art::after{opacity:.62}
+/* marco de navegador para el sitio de Fresco */
+.caso-art.marco{background:linear-gradient(158deg,var(--king-blue),var(--dark-blue));padding:.85rem;display:flex;flex-direction:column}
+.caso-art.marco::after{content:none}
+.chrome{display:flex;align-items:center;gap:.4rem;padding:.5rem .7rem;background:rgba(255,255,255,.12);border-radius:10px 10px 0 0;flex:none}
+.chrome span{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.32)}
+.chrome i{margin-left:.6rem;font-style:normal;font-size:.6rem;letter-spacing:.06em;color:rgba(255,255,255,.72);background:rgba(0,0,0,.24);padding:.2rem .8rem;border-radius:99px;transition:background .4s}
+.caso:hover .chrome i{background:var(--king-blue);color:#fff}
+.caso-art.marco .vp{position:relative;height:clamp(220px,26vw,330px);overflow:hidden;border-radius:0 0 5px 5px;background:#fff}
+.caso-art.marco .vp img{width:100%;height:auto;display:block;position:static;transform:translateY(0);transition:transform 1s cubic-bezier(.2,.7,.3,1)}
+.caso:hover .caso-art.marco .vp img{transform:translateY(calc(-100% + clamp(220px,26vw,330px)));transition:transform 6.5s cubic-bezier(.45,0,.3,1)}
+.caso-art.marco .prog{position:absolute;left:0;bottom:0;height:3px;width:0;z-index:4;background:linear-gradient(90deg,var(--light-blue),#8ed7ff);transition:width 1s}
+.caso:hover .caso-art.marco .prog{width:100%;transition:width 6.5s cubic-bezier(.45,0,.3,1)}
+
+.caso-txt{padding:clamp(1.4rem,3vw,2.2rem);display:flex;flex-direction:column;gap:.55rem;justify-content:center}
+.caso-txt .cat{font-size:.64rem;letter-spacing:.2em;text-transform:uppercase;color:var(--light-blue);font-weight:600}
+.caso-txt h3{font-size:clamp(1.25rem,2.6vw,1.7rem);font-weight:900;letter-spacing:-.02em}
+.caso-logo{height:clamp(34px,4vw,46px);width:auto;max-width:min(230px,55%);object-fit:contain;object-position:left;margin:.2rem 0}
+.caso-txt .logro{font-weight:600;font-size:.96rem;color:#bfe1ff;display:flex;align-items:baseline;gap:.5rem}
+.caso-txt .logro::before{content:"";width:7px;height:7px;border-radius:2px;background:var(--light-blue);transform:rotate(45deg);flex:none}
+.caso-txt p{font-size:.92rem;color:rgba(255,255,255,.66);line-height:1.68}
+.visita{display:inline-flex;align-items:center;gap:.45rem;align-self:flex-start;margin-top:.5rem;
+  font-size:.84rem;font-weight:600;color:var(--light-blue);border-bottom:1px solid rgba(32,159,244,.4);padding-bottom:.15rem;transition:gap .3s,color .3s}
+.visita svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:2;flex:none}
+.visita:hover{gap:.75rem;color:#fff}
+.clara .visita:hover{color:var(--dark-blue);border-color:var(--dark-blue)}
+
+/* ================= PROCESO ================= */
+.proceso{padding:clamp(4.5rem,11vw,9rem) 0 clamp(5rem,12vw,10rem)}
+/* encabezado con los controles a la derecha */
+.phead{display:flex;justify-content:space-between;align-items:flex-end;gap:2rem;flex-wrap:wrap}
+.pnav{display:flex;gap:.6rem;flex:none}
+.pbtn{
+  width:48px;height:48px;border-radius:50%;display:grid;place-items:center;cursor:pointer;
+  border:1px solid rgba(255,255,255,.3);background:rgba(255,255,255,.05);color:#fff;
+  transition:background .35s,border-color .35s,opacity .35s,transform .35s;
+}
+.pbtn svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:1.9}
+.pbtn:hover:not(:disabled){background:var(--king-blue);border-color:var(--king-blue);transform:translateY(-2px)}
+.pbtn:disabled{opacity:.3;cursor:default}
+
+/* acordeón horizontal */
+.pasos{list-style:none;display:flex;gap:.75rem;margin-top:clamp(1.8rem,4vw,2.8rem);height:clamp(330px,36vw,410px)}
+.paso{
+  position:relative;isolation:isolate;
+  flex:1 1 0;min-width:88px;flex-grow:.0001;overflow:hidden;cursor:pointer;text-align:left;
+  border:1px solid rgba(255,255,255,.16);border-radius:22px;padding:1.5rem 1.3rem;
+  background:rgba(255,255,255,.04);color:#fff;
+  display:flex;flex-direction:column;
+  transition:flex-grow .6s cubic-bezier(.22,1,.36,1),background .45s,border-color .45s;
+}
+.paso:hover{border-color:rgba(255,255,255,.45)}
+.paso.on{
+  flex-grow:5;cursor:default;border-color:var(--light-blue);
+  background:linear-gradient(150deg,rgba(0,61,145,.55),rgba(32,159,244,.08) 72%);
+}
+/* la foto del paso, fundida con el fondo */
+.paso::before{
+  content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
+  background-image:linear-gradient(170deg,rgba(0,20,60,.06) 6%,rgba(0,14,40,.6) 62%,rgba(0,10,30,.93) 97%),var(--img);
+  background-size:cover;background-position:center;
+  opacity:.32;
+  transition:opacity .5s ease;
+}
+.paso.on::before{opacity:1}
+.paso > *{position:relative;z-index:1}
+.pnum{
+  font-size:clamp(1.9rem,3.4vw,2.6rem);font-weight:900;letter-spacing:-.04em;line-height:1;
+  color:rgba(255,255,255,.32);flex:none;transition:color .4s;
+}
+.paso.on .pnum{color:var(--light-blue)}
+.pvert{
+  writing-mode:vertical-rl;transform:rotate(180deg);white-space:nowrap;margin-top:auto;
+  font-size:.66rem;font-weight:600;letter-spacing:.09em;text-transform:uppercase;
+  color:rgba(255,255,255,.55);max-height:100%;transition:color .3s;
+}
+.paso:hover .pvert{color:#fff}
+.ptxt{margin-top:auto;max-width:46ch;opacity:0;transition:opacity .45s .18s}
+.paso.on .ptxt{opacity:1}
+.paso:not(.on) .ptxt{display:none}
+.paso.on .pvert{display:none}
+.ptxt h4{font-weight:600;font-size:clamp(1.05rem,2.2vw,1.4rem);margin-bottom:.6rem;line-height:1.3}
+.ptxt p{font-size:.93rem;color:rgba(255,255,255,.75);line-height:1.68}
+/* puntos */
+.ppuntos{display:flex;gap:.45rem;margin-top:1.4rem}
+.ppuntos button{
+  width:26px;height:3px;border-radius:99px;border:0;cursor:pointer;padding:0;
+  background:rgba(255,255,255,.22);transition:background .3s,width .3s;
+}
+.ppuntos button.on{background:var(--light-blue);width:44px}
+@media(max-width:980px){
+  .pasos{flex-direction:column;height:auto;gap:.65rem}
+  .paso{flex:none;min-width:0;padding:1.25rem 1.15rem}
+  .paso::before{opacity:.42}
+  .paso.on::before{opacity:.95}
+  .pnum{font-size:1.7rem;margin-bottom:.5rem}
+  .pvert{writing-mode:horizontal-tb;transform:none;margin-top:0;letter-spacing:.12em;font-size:.74rem;white-space:normal}
+  .ptxt{margin-top:0}
+  .pnav,.ppuntos{display:none}
+}
+
+/* ================= CONTACTO ================= */
+.cierre{padding:clamp(5rem,12vw,10rem) 0 clamp(3rem,7vw,5rem)}
+.h2.grande{font-size:clamp(2.3rem,8vw,6rem)}
+.contactos{display:grid;gap:.8rem;margin-top:clamp(2.5rem,6vw,4rem)}
+@media(min-width:640px){.contactos{grid-template-columns:1fr 1fr}}
+@media(min-width:1040px){.contactos{grid-template-columns:repeat(4,1fr)}}
+.contactos a{
+  display:flex;align-items:center;gap:.9rem;padding:1.05rem 1.15rem;border-radius:18px;
+  border:1px solid rgba(255,255,255,.14);
+  background:linear-gradient(158deg,rgba(4,16,44,.68),rgba(2,10,30,.5));
+  transition:border-color .4s,transform .4s cubic-bezier(.16,1,.3,1),box-shadow .4s;
+}
+.contactos a:hover{border-color:var(--light-blue);transform:translateY(-4px);box-shadow:0 14px 26px -14px rgba(32,159,244,.45)}
+.contactos .ic{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;background:rgba(32,159,244,.16);flex:none}
+.contactos .ic svg{width:18px;height:18px;stroke:var(--light-blue);fill:none;stroke-width:1.7}
+.contactos .tx{display:grid;gap:.15rem;min-width:0}
+.contactos .tx i{font-style:normal;font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.5)}
+.contactos .tx b{font-weight:600;font-size:.92rem;overflow:hidden;text-overflow:ellipsis}
+.pie{margin-top:clamp(3.5rem,9vw,6rem);padding-top:1.6rem;border-top:1px solid rgba(255,255,255,.12);text-align:center}
+.pie img{height:38px;width:auto;margin:0 auto 1rem;filter:brightness(0) invert(1);opacity:.9}
+.pie p{color:rgba(255,255,255,.6);font-size:.9rem;margin:0 auto}
+.pie .legal{margin-top:1.4rem;font-size:.72rem;color:rgba(255,255,255,.4)}
+
+
+/* ---------- barra de avance de lectura ---------- */
+.avance{
+  position:fixed;top:0;left:0;height:2px;width:0;z-index:70;
+  background:linear-gradient(90deg,var(--king-blue),var(--light-blue));
+  transition:width .12s linear;
+}
+
+/* ---------- imágenes que se descubren con cortina ---------- */
+.cortina{position:relative;overflow:hidden}
+.cortina::after{
+  content:"";position:absolute;inset:0;z-index:4;background:var(--king-blue);
+  transform:scaleY(1);transform-origin:bottom;
+  transition:transform .85s cubic-bezier(.76,0,.24,1);
+}
+.visible .cortina::after{transform:scaleY(0)}
+.cortina > img,.cortina > .vp{transform:scale(1.06);transition:transform 1.1s cubic-bezier(.22,1,.36,1) .15s}
+.visible .cortina > img,.visible .cortina > .vp{transform:none}
+
+/* ---------- línea que une los pasos del proceso ---------- */
+/* ---------- subrayado que se dibuja bajo cada antetítulo ---------- */
+.eyebrow{position:relative;display:inline-block;padding-bottom:.5rem}
+.eyebrow::after{
+  content:"";position:absolute;left:0;bottom:0;height:2px;width:100%;
+  background:currentColor;transform:scaleX(0);transform-origin:left;
+  transition:transform .7s cubic-bezier(.22,1,.36,1) .15s;
+}
+.visible .eyebrow::after,.entra .eyebrow::after{transform:scaleX(1)}
+
+
+/* ================= RECORRIDO HORIZONTAL =================
+   Las cinco primeras secciones viajan de izquierda a derecha
+   mientras se hace scroll; Contacto vuelve a ser vertical.
+   Bajo 980px todo vuelve al desplazamiento normal. */
+@media(min-width:981px){
+  .riel{position:relative}
+  .pista{
+    position:sticky;top:0;height:100vh;display:flex;align-items:stretch;
+    width:max-content;
+  }
+
+  /* El desplazamiento lo lleva el compositor del navegador, no JavaScript.
+     Así el recorrido no puede "engancharse" aunque se haga scroll muy rápido:
+     deja de depender de que el hilo principal llegue a tiempo a cada cuadro. */
+  @supports (animation-timeline: scroll()) {
+    .riel{
+      view-timeline-name:--riel;
+      view-timeline-axis:block;
+    }
+    .pista{
+      animation:desplazarPista linear both;
+      animation-timeline:--riel;
+      animation-range:contain 0% contain 100%;
+    }
+    @keyframes desplazarPista{
+      from{ transform:translate3d(0,0,0) }
+      to  { transform:translate3d(calc(-100% + 100vw),0,0) }
+    }
+  }
+  .pista > .seccion,.pista > .hero{
+    width:100vw;height:100vh;flex:none;overflow:hidden;
+    display:flex;flex-direction:column;justify-content:center;
+    padding-top:var(--nav-h);
+    /* aísla cada panel para que un cambio dentro no obligue a recalcular
+       el resto de la fila. Se evita content-visibility a propósito: difiere
+       el dibujado y provoca un tirón cuando entran varios paneles seguidos. */
+    contain:layout paint;
+  }
+  .pista .wrap{width:min(1280px,88vw)}
+  /* dentro del recorrido el contenido se compacta */
+  .pista .seccion{padding-top:calc(var(--nav-h) + 1rem);padding-bottom:1.5rem}
+  .pista .h2{font-size:clamp(1.7rem,3.4vw,2.9rem)}
+  .pista .lead{margin-top:1rem;font-size:clamp(.95rem,1.15vw,1.05rem)}
+  .pista .nos-grid{margin-top:1.4rem;gap:2rem}
+  .pista .pilares{margin-top:1.6rem;gap:.9rem}
+  .pista .pilar{padding:1.2rem}
+  .pista .pilar h4{margin:.9rem 0 .4rem;font-size:1.02rem}
+  .pista .pilar p{font-size:.88rem}
+  .pista .frase{margin-top:0;padding:1.2rem 0}
+  .pista .frase p{font-size:clamp(1rem,1.6vw,1.3rem)}
+  .pista .svc-tabs{margin-top:1.4rem;gap:.5rem}
+  .pista .svc-tab{padding:.7rem .4rem;font-size:.62rem;gap:.45rem}
+  .pista .svc-tab .ic{width:32px;height:32px;border-radius:10px}
+  .pista .svc-tab .ic svg{width:16px;height:16px}
+  .pista .svc-panel{margin-top:.7rem}
+  /* la pieza llena el panel; el encuadre de cada una se fija por JS */
+  .pista .svc-visual{min-height:clamp(215px,24vw,330px)}
+  .pista .svc-panel{grid-template-columns:1.05fr 1fr}
+  .pista .svc-body{padding:1.1rem 1.3rem}
+  .pista .svc-body p{font-size:.85rem;line-height:1.55;margin-bottom:.9rem}
+  .pista .svc-tabs{margin-top:1rem}
+  .pista .svc-body{padding:1.2rem 1.4rem}
+  .pista .svc-body h3{font-size:clamp(1.1rem,1.8vw,1.45rem);margin:.5rem 0 .6rem}
+  .pista .svc-body p{font-size:.88rem;line-height:1.6;margin-bottom:1rem}
+  .pista .casos-grid{margin-top:1.4rem;gap:.9rem;grid-template-columns:1.25fr 1fr 1fr}
+  .pista .caso.principal{grid-column:auto;display:flex;flex-direction:column}
+  .pista .caso-art{min-height:clamp(140px,15vw,210px);height:clamp(140px,15vw,210px);flex:none}
+  .pista .caso-art.marco{height:auto;min-height:0}
+  .pista .caso-txt{flex:1}
+  .pista .caso-art.marco .vp{height:clamp(120px,13vw,180px)}
+  .pista .caso-txt{padding:1rem 1.1rem;gap:.35rem}
+  .pista .caso-txt p{font-size:.84rem;line-height:1.55}
+  .pista .caso-txt h3{font-size:1.1rem}
+  .pista .caso-logo{height:30px}
+  .pista .pasos{height:clamp(240px,26vw,330px);margin-top:1.3rem}
+  /* el hero se reparte de arriba abajo y deja aire para el indicador */
+  .pista .hero{justify-content:space-between;padding-bottom:4.2rem}
+  .pista .hero-mid{flex:1;padding:.5rem 0 0;justify-content:center}
+  .pista .hero-title{font-size:clamp(2.6rem,7.6vw,6.6rem)}
+  .pista .kicker{margin-bottom:1rem}
+  .pista .hero-sub{margin-top:1rem;font-size:clamp(.98rem,1.25vw,1.12rem)}
+  .pista .hero-cta{margin-top:1.3rem}
+  .pista .hero-pie{padding:.9rem 0 0;flex:none}
+  .pista .dato b{font-size:1.3rem}
+
+  /* indicador de avance del recorrido */
+  .brujula{
+    position:fixed;left:50%;bottom:26px;transform:translateX(-50%);z-index:65;
+    display:flex;align-items:center;gap:.7rem;pointer-events:none;
+  }
+  .brujula i{
+    display:block;width:34px;height:3px;border-radius:99px;background:rgba(255,255,255,.22);
+    transition:background .4s,width .4s;
+  }
+  .brujula i.on{background:var(--light-blue);width:56px}
+  .clara-visible .brujula i{background:rgba(6,21,41,.2)}
+  .clara-visible .brujula i.on{background:var(--king-blue)}
+}
+@media(max-width:980px){
+  .pista{display:block}
+  .brujula{display:none}
+}
+
+
+/* ---------- sombras suaves y en azul sobre fondo claro ---------- */
+.clara .pilar,.clara .caso{
+  box-shadow:0 14px 34px -22px rgba(0,61,145,.22);
+  transition:border-color .45s,box-shadow .45s,transform .45s cubic-bezier(.22,1,.36,1);
+}
+.clara .pilar:hover{
+  border-color:rgba(32,159,244,.45);
+  box-shadow:0 12px 26px -16px rgba(0,61,145,.28), 0 0 0 1px rgba(32,159,244,.16);
+  transform:translateY(-3px);
+}
+.clara .caso:hover{
+  border-color:rgba(32,159,244,.45);
+  box-shadow:0 14px 28px -16px rgba(0,61,145,.3), 0 0 0 1px rgba(32,159,244,.14);
+  transform:translateY(-3px);
+}
+/* el halo inferior desaparece en claro: ahí sobra */
+.clara .pilar::after{content:none}
+/* el brillo que sigue al cursor, mucho más tenue sobre claro */
+.clara .caso .lustre{
+  background:radial-gradient(240px 240px at var(--mx,50%) var(--my,0%),rgba(32,159,244,.10),transparent 70%);
+}
+
+
+/* el nombre de la marca va sobre la foto: siempre blanco y con peso */
+
+/* velo bajo el nombre, también en las secciones claras */
+.clara .caso-art::after{
+  background:linear-gradient(180deg,transparent 58%,rgba(0,8,24,.38));
+}
+
+
+/* ---------- los tres recuadros flotan, suave pero perceptible ---------- */
+@keyframes flotarPilar{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-11px)}
+}
+.pilar{animation:flotarPilar 5.4s ease-in-out infinite;will-change:transform}
+.pilares .pilar:nth-child(2){animation-delay:-1.8s;animation-duration:6.1s}
+.pilares .pilar:nth-child(3){animation-delay:-3.5s;animation-duration:5.7s}
+/* al tocarlos se detiene: manda la inclinación con el cursor */
+.pilar:hover{animation-play-state:paused}
+.pilar.inclina{animation:none}
+@media(prefers-reduced-motion:reduce){.pilar{animation:none}}
+
+
+/* ---------- destello que recorre los títulos ---------- */
+/* Destello sobre las letras.
+   Antes se hacía con `filter` y `text-shadow` animados: ambos obligan al
+   navegador a volver a dibujar el texto (y su desenfoque) en cada cuadro,
+   sobre titulares de 60-100 px. Ahora el brillo es una capa aparte que solo
+   cambia de opacidad, que el compositor resuelve sin repintar nada. */
+.destella .ltr{ position:relative }
+.destella .ltr::after{
+  content:attr(data-c);
+  position:absolute;left:0;top:0;
+  color:#dff0ff;
+  opacity:0;
+  pointer-events:none;
+  animation:destelloLtr 5.2s ease-in-out infinite;
+  animation-delay:calc(var(--i,0) * 0.055s + 1.1s);
+}
+@keyframes destelloLtr{
+  0%, 62%, 100%{ opacity:0 }
+  28%{ opacity:.85 }
+}
+.clara.destella .ltr::after{ color:var(--light-blue) }
+
+@media(prefers-reduced-motion:reduce){
+  .destella .ltr{animation:none}
+}
+
+</style>
+</head>
+<body>
+<div class="avance" id="avance" aria-hidden="true"></div>
+<div class="brujula" id="brujula" aria-hidden="true"></div>
+
+<!-- fondo -->
+
+<!-- precarga -->
+<div class="pre" id="pre">
+  <div class="pre-in">
+    <img class="pre-a" src="img/logo-a-blanco.png" alt="">
+    <div class="pre-barra"><i id="barra"></i></div>
+    <div class="pre-num" id="num">000</div>
+  </div>
+</div>
+
+<!-- navegación -->
+<nav class="nav" id="nav">
+  <div class="wrap">
+    <a href="#" class="logo" aria-label="Alfa Agency"><img src="img/logo-alfa-agency.png" alt="Alfa Agency"></a>
+    <ul class="links">
+      <li><a href="#inicio">Inicio</a></li>
+      <li><a href="#nosotros">Nosotros</a></li>
+      <li><a href="#servicios">Servicios</a></li>
+      <li><a href="#casos">Casos</a></li>
+      <li><a href="#proceso">Proceso</a></li>
+    </ul>
+    <a class="btn btn-wa" href="https://wa.me/584245040868" target="_blank" rel="noopener">Hablemos</a>
+    <button class="burger" aria-label="Menú"><i></i></button>
+  </div>
+</nav>
+
+<!-- hero -->
+<div class="riel" id="riel">
+<div class="pista" id="pista">
+<header class="hero" id="inicio">
+  <div class="wrap hero-mid">
+    <div class="kicker sube"><span data-decodificar>Agencia creativa para marcas modernas</span></div>
+
+    <h1 class="titulo perspectiva">
+      <span class="linea"><span data-letras="150">Soluciones</span></span>
+      <span class="linea"><span class="destello" data-letras="430">creativas</span></span>
+    </h1>
+
+    <p class="hero-sub sube">Ayudamos a negocios y marcas personales a crecer con <b>marketing, social media, video y campañas</b> diseñadas para convertir atención en resultados.</p>
+
+    <div class="hero-cta sube">
+      <a class="btn btn-wa" href="https://wa.me/584245040868?text=Hola%20Alfa%20Agency%2C%20quiero%20una%20asesor%C3%ADa%20inicial" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 004.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0012.04 2zm5.8 14.17c-.25.69-1.45 1.32-2 1.4-.51.08-1.16.11-1.87-.12-.43-.14-.98-.32-1.69-.63-2.97-1.28-4.91-4.27-5.06-4.47-.15-.2-1.21-1.61-1.21-3.07 0-1.46.77-2.18 1.04-2.48.27-.3.59-.37.79-.37.2 0 .39 0 .57.01.18.01.42-.07.66.5.25.59.84 2.05.91 2.2.07.15.12.32.02.52-.1.2-.15.32-.3.5-.15.17-.31.39-.44.52-.15.15-.3.31-.13.61.17.3.76 1.25 1.63 2.03 1.12 1 2.06 1.31 2.36 1.46.3.15.47.12.65-.07.17-.2.75-.87.95-1.17.2-.3.4-.25.66-.15.27.1 1.71.81 2.01.95.3.15.5.22.57.35.07.12.07.72-.18 1.41z"/></svg>
+        Asesoría inicial sin costo
+      </a>
+      <a class="btn btn-vidrio" href="#nosotros">Ver nuestro trabajo</a>
+    </div>
+  </div>
+
+  <div class="wrap hero-pie sube">
+    <div class="fila">
+      <div style="display:flex;gap:2rem 3rem;flex-wrap:wrap;align-items:flex-end">
+        <div class="dato">Clientes satisfechos <b data-num="45" data-pre="+">+45</b></div>
+        <div class="dato">Servicios <b data-num="8" data-pad="1">08</b></div>
+        <div class="dato chico">Primera conversación <b>Sin costo</b></div>
+      </div>
+      <div class="cue"><i></i> Desliza</div>
+    </div>
+  </div>
+</header>
+
+<!-- franja donde el metal queda a la vista -->
+
+<!-- ============ NOSOTROS ============ -->
+<section class="seccion clara nosotros" id="nosotros">
+  <div class="wrap">
+    <div class="eyebrow sube-al-ver" data-decodificar>Sobre Alfa Agency</div>
+    <h2 class="h2 perspectiva">
+      <span class="rev"><span data-letras="80">Marcas con alma,</span></span>
+      <span class="rev"><span><em data-grad data-letras="300">estrategia</em> <span data-letras="560">y</span></span></span>
+      <span class="rev"><span data-letras="640">presencia real.</span></span>
+    </h2>
+
+    <div class="nos-grid">
+      <div class="sube-al-ver">
+        <p>Alfa Agency nace para impulsar a emprendedores y empresas venezolanas que quieren transformar sus ideas en proyectos sólidos, auténticos y emocionalmente conectados.</p>
+        <p>Somos un equipo con formación en mercadeo y administración que acompaña cada marca con visión y criterio, desde la primera conversación hasta el análisis de resultados.</p>
+      </div>
+      <div class="frase sube-al-ver" style="margin-top:0">
+        <p>No solo creamos contenido: <b>creamos conexiones</b>. No solo diseñamos campañas: <span>diseñamos caminos</span>.</p>
+      </div>
+    </div>
+
+    <div class="pilares">
+      <article class="pilar sube-al-ver"><span class="lustre" aria-hidden="true"></span>
+        <div class="num"><span data-decodificar>01</span></div>
+        <h4>Estrategia con propósito</h4>
+        <p>Cada decisión parte de entender tu marca, tu audiencia y tus metas. Nada al azar.</p>
+      </article>
+      <article class="pilar sube-al-ver"><span class="lustre" aria-hidden="true"></span>
+        <div class="num"><span data-decodificar>02</span></div>
+        <h4>Creatividad aplicada</h4>
+        <p>Ideas que no solo se ven bien — comunican, conectan y mueven a la acción.</p>
+      </article>
+      <article class="pilar sube-al-ver"><span class="lustre" aria-hidden="true"></span>
+        <div class="num"><span data-decodificar>03</span></div>
+        <h4>Trato humano y cercano</h4>
+        <p>Somos un equipo accesible que acompaña cada etapa sin perder la calidez.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============ SERVICIOS ============ -->
+<section class="seccion oscura servicios" id="servicios">
+  <div class="wrap">
+    <div class="eyebrow sube-al-ver" data-decodificar>Servicios</div>
+    <h2 class="h2 perspectiva">
+      <span class="rev"><span data-letras="60">Lo visual, lo</span></span>
+      <span class="rev"><span><em data-grad data-letras="240">estratégico</em> <span data-letras="500">y lo</span></span></span>
+      <span class="rev"><span data-letras="600">técnico, juntos.</span></span>
+    </h2>
+    <p class="lead sube-al-ver">Creamos sistemas de comunicación para que tu marca se vea mejor, suene más clara y crezca con dirección.</p>
+
+    <div class="svc-tabs sube-al-ver" id="svcTabs" role="tablist" aria-label="Servicios"></div>
+
+    <div class="svc-panel sube-al-ver">
+      <div class="svc-visual cortina"><img id="svcPic" src="img/servicio-1-redes-sociales.webp" alt=""></div>
+      <div class="svc-body">
+        <div class="tag">Servicio</div>
+        <h3 id="svcTitle">Gestión de Redes Sociales</h3>
+        <p id="svcDesc">Construimos comunidades con una voz humana, cercana y coherente para transformar seguidores en aliados de tu proyecto.</p>
+        <a class="btn btn-wa" id="svcCta" href="#" target="_blank" rel="noopener" style="align-self:flex-start">Contratar servicio</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============ CASOS ============ -->
+<section class="seccion clara casos" id="casos">
+  <div class="wrap">
+    <div class="eyebrow sube-al-ver" data-decodificar>Casos de éxito</div>
+    <h2 class="h2 perspectiva">
+      <span class="rev"><span data-letras="60">Tres marcas,</span></span>
+      <span class="rev"><span data-letras="280">tres formas de</span></span>
+      <span class="rev"><span><em data-grad data-letras="520">generar impacto</em>.</span></span>
+    </h2>
+    <p class="lead sube-al-ver">Cada proyecto tiene su propio reto. Nuestro trabajo es encontrar la esencia, ordenarla visualmente y convertirla en una presencia que las personas recuerden.</p>
+
+    <div class="casos-grid">
+      <article class="caso principal sube-al-ver">
+        <span class="lustre" aria-hidden="true"></span>
+        <div class="caso-art marco cortina">
+          <div class="chrome" aria-hidden="true"><span></span><span></span><span></span><i>frescovenezuela.com</i></div>
+          <div class="vp"><img src="img/caso-fresco-recorrido.jpeg" alt="Sitio web de Fresco" loading="lazy"><span class="prog" aria-hidden="true"></span></div>
+        </div>
+        <div class="caso-txt">
+          <div class="cat">Panadería · Página web</div>
+          <img class="caso-logo" src="img/logo-fresco.png" alt="Fresco">
+          <div class="logro">Catálogo de 16 productos con pedido directo</div>
+          <p>Diseñamos y desarrollamos su casa digital: catálogo filtrable por línea, recetas, zona de aliados comerciales y contacto inmediato por WhatsApp.</p>
+          <a class="visita" href="https://frescovenezuela.com" target="_blank" rel="noopener">Ver el sitio
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg>
+          </a>
+        </div>
+      </article>
+
+      <article class="caso sube-al-ver">
+        <span class="lustre" aria-hidden="true"></span>
+        <div class="caso-art cortina"><img src="img/caso-la-pizarra.webp" alt="Publicaciones de La Pizarra" loading="lazy"><span class="marca">La Pizarra</span></div>
+        <div class="caso-txt">
+          <div class="cat">Comunicación deportiva</div>
+          <h3>La Pizarra</h3>
+          <div class="logro">Identidad visual con autoridad</div>
+          <p>Un sistema gráfico reconocible para diferenciar una plataforma de noticias deportivas en un mercado saturado.</p>
+          <a class="visita" href="https://www.instagram.com/lapizarraplay/" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" aria-hidden="true" style="fill:none;stroke:currentColor;stroke-width:1.9"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r=".9" style="fill:currentColor;stroke:none"/></svg>@lapizarraplay
+          </a>
+        </div>
+      </article>
+
+      <article class="caso sube-al-ver">
+        <span class="lustre" aria-hidden="true"></span>
+        <div class="caso-art cortina"><img src="img/caso-checkad.webp" alt="Publicaciones de Checkad" loading="lazy"><span class="marca">Checkad</span></div>
+        <div class="caso-txt">
+          <div class="cat">Software deportivo</div>
+          <h3>Checkad</h3>
+          <div class="logro">Cuenta B2B con comunidad de +1.400 seguidores</div>
+          <p>Llevamos la presencia digital de un sistema de gestión para gimnasios: piezas que explican el producto y muestran la app en uso.</p>
+          <a class="visita" href="https://www.instagram.com/checkad_gym/" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" aria-hidden="true" style="fill:none;stroke:currentColor;stroke-width:1.9"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r=".9" style="fill:currentColor;stroke:none"/></svg>@checkad_gym
+          </a>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============ PROCESO ============ -->
+<section class="seccion oscura proceso" id="proceso">
+  <div class="wrap">
+    <div class="phead">
+      <div>
+        <div class="eyebrow sube-al-ver" data-decodificar>Proceso de trabajo</div>
+        <h2 class="h2 perspectiva">
+          <span class="rev"><span data-letras="60">De una conversación</span></span>
+          <span class="rev"><span data-letras="320">a una marca lista</span></span>
+          <span class="rev"><span><em data-grad data-letras="560">para crecer</em>.</span></span>
+        </h2>
+      </div>
+      <div class="pnav sube-al-ver">
+        <button class="pbtn" id="pPrev" aria-label="Paso anterior"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button>
+        <button class="pbtn" id="pNext" aria-label="Paso siguiente"><svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg></button>
+      </div>
+    </div>
+
+    <ol class="pasos" id="pasos">
+      <li class="paso on" style="--img:url('img/proceso-1-reunion.webp')" tabindex="0">
+        <span class="pnum">01</span>
+        <span class="pvert">Reunión y asesoría gratuita</span>
+        <div class="ptxt"><h4>Reunión y asesoría gratuita</h4><p>Nos conocemos, auditamos tu proyecto y definimos qué servicio puede ayudarte mejor en este momento.</p></div>
+      </li>
+      <li class="paso" style="--img:url('img/proceso-2-recopilacion.webp')" tabindex="0">
+        <span class="pnum">02</span>
+        <span class="pvert">Recopilación de información</span>
+        <div class="ptxt"><h4>Recopilación de información</h4><p>Reunimos datos, ideas y referencias para convertir tu visión en una base clara antes de crear.</p></div>
+      </li>
+      <li class="paso" style="--img:url('img/proceso-3-desarrollo.webp')" tabindex="0">
+        <span class="pnum">03</span>
+        <span class="pvert">Desarrollo creativo y técnico</span>
+        <div class="ptxt"><h4>Desarrollo creativo y técnico</h4><p>Diseñamos, escribimos, estructuramos o desarrollamos cuidando que cada detalle represente tu esencia.</p></div>
+      </li>
+      <li class="paso" style="--img:url('img/proceso-4-presentacion.webp')" tabindex="0">
+        <span class="pnum">04</span>
+        <span class="pvert">Presentación y lanzamiento</span>
+        <div class="ptxt"><h4>Presentación y lanzamiento</h4><p>Presentamos las propuestas, ajustamos lo necesario y dejamos la estrategia lista para salir al mundo.</p></div>
+      </li>
+      <li class="paso" style="--img:url('img/proceso-5-analisis.webp')" tabindex="0">
+        <span class="pnum">05</span>
+        <span class="pvert">Análisis de resultados</span>
+        <div class="ptxt"><h4>Análisis de resultados</h4><p>Revisamos cómo responde tu audiencia para seguir tomando decisiones con sentido y propósito.</p></div>
+      </li>
+    </ol>
+    <div class="ppuntos" id="pPuntos"></div>
+  </div>
+</section>
+
+
+</div>
+</div>
+
+<!-- ============ CONTACTO ============ -->
+<section class="seccion oscura cierre" id="contacto">
+  <div class="wrap">
+    <div class="eyebrow sube-al-ver" data-decodificar>Contacto</div>
+    <h2 class="h2 grande perspectiva">
+      <span class="rev"><span data-letras="60">Hablemos de tu</span></span>
+      <span class="rev"><span><em data-grad data-letras="300">próxima etapa</em>.</span></span>
+    </h2>
+    <p class="lead sube-al-ver">Agenda una conversación inicial sin costo y revisamos juntos qué necesita tu proyecto para avanzar con más claridad.</p>
+
+    <div class="contactos">
+      <a class="sube-al-ver" href="https://wa.me/584245040868?text=Hola%20Alfa%20Agency%2C%20quiero%20conversar%20sobre%20mi%20marca" target="_blank" rel="noopener">
+        <span class="ic"><svg viewBox="0 0 24 24"><path d="M3 20l1.4-4.1A8.3 8.3 0 1112 20a8.4 8.4 0 01-4-1L3 20z"/><path d="M8.6 8.4c.2-.4.4-.4.6-.4h.5c.2 0 .4 0 .6.4l.7 1.7-.7.9c-.1.2-.2.3 0 .6.7 1.2 1.7 1.9 2.8 2.3.3.1.4 0 .6-.2l.6-.7c.2-.2.3-.2.6-.1l1.6.8c.2.1.3.3.3.4 0 .5-.4 1.4-1.2 1.6-1.2.3-2.6-.2-4.2-1.2-1.5-1-2.6-2.5-3-3.7-.3-1 0-1.9.2-2.4z"/></svg></span>
+        <span class="tx"><i>WhatsApp</i><b>0424-504-0868</b></span>
+      </a>
+      <a class="sube-al-ver" href="mailto:Alfaagencyy@gmail.com">
+        <span class="ic"><svg viewBox="0 0 24 24"><rect x="2.5" y="5" width="19" height="14" rx="2.5"/><path d="M3 7l9 6 9-6"/></svg></span>
+        <span class="tx"><i>Correo</i><b>Alfaagencyy@gmail.com</b></span>
+      </a>
+      <a class="sube-al-ver" href="tel:+584245040868">
+        <span class="ic"><svg viewBox="0 0 24 24"><path d="M6.5 3h3l1.5 4-2 1.5a12 12 0 006.5 6.5l1.5-2 4 1.5v3a2 2 0 01-2.2 2A17 17 0 014.5 5.2 2 2 0 016.5 3z"/></svg></span>
+        <span class="tx"><i>Llamadas</i><b>0424-504-0868</b></span>
+      </a>
+      <a class="sube-al-ver" href="https://instagram.com/alfaagencyy" target="_blank" rel="noopener">
+        <span class="ic"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r=".9" fill="currentColor" stroke="none"/></svg></span>
+        <span class="tx"><i>Instagram</i><b>@alfaagencyy</b></span>
+      </a>
+    </div>
+
+    <div class="pie">
+      <img src="img/logo-alfa-agency.png" alt="Alfa Agency">
+      <p>Guiar y potenciar tu futuro.</p>
+      <div class="legal">© <span id="yr">2026</span> Alfa Agency · Imágenes espaciales: NASA, dominio público</div>
+    </div>
+  </div>
+</section>
+
+
+<script>
+(function(){
+  "use strict";
+  var pre = document.getElementById('pre'),
+      num = document.getElementById('num'),
+      barra = document.getElementById('barra'),
+      hero = document.querySelector('.hero'),
+      nav = document.getElementById('nav');
+
+  /* --- precarga: contador y barra --- */
+  var v = 0, dur = 1400, t0 = performance.now();
+  function tick(ahora){
+    var p = Math.min((ahora - t0) / dur, 1);
+    var e = 1 - Math.pow(1 - p, 3);          // desaceleración
+    v = Math.round(e * 100);
+    num.textContent = String(v).padStart(3, '0');
+    barra.style.width = (e * 100) + '%';
+    if (p < 1) requestAnimationFrame(tick);
+    else terminar();
+  }
+  requestAnimationFrame(tick);
+
+  function terminar(){
+    if (window.fluidoEntrar) window.fluidoEntrar();
+    setTimeout(function(){
+      pre.classList.add('fuera');
+      hero.classList.add('entra');
+      if (window.activarTextos) window.activarTextos(hero);
+    }, 180);
+  }
+
+  /* --- medidor opcional: abrir con ?fps al final de la URL --- */
+  if (location.search.indexOf('fps') > -1) {
+    var m = document.createElement('div');
+    m.style.cssText = 'position:fixed;left:12px;bottom:12px;z-index:200;background:rgba(0,0,0,.7);' +
+      'color:#209ff4;font:600 13px/1 Poppins,sans-serif;padding:8px 12px;border-radius:8px;' +
+      'letter-spacing:.06em;backdrop-filter:blur(8px)';
+    document.body.appendChild(m);
+    setInterval(function(){ m.textContent = (window.__fps || 0) + ' FPS'; }, 400);
+  }
+
+  /* --- barra de avance + nav sólida: un solo pintado por cuadro --- */
+  var barraAvance = document.getElementById('avance');
+  var altoDisponible = 0;
+  function medirAlto(){ altoDisponible = document.documentElement.scrollHeight - innerHeight; }
+  function pintarScroll(){
+    barraAvance.style.width = (altoDisponible > 0 ? (scrollY / altoDisponible) * 100 : 0) + '%';
+    nav.classList.toggle('solida', scrollY > 40);
+  }
+  var scrollPendiente = false;
+  function alScroll(){
+    if (scrollPendiente) return;
+    scrollPendiente = true;
+    requestAnimationFrame(function(){ scrollPendiente = false; pintarScroll(); });
+  }
+  medirAlto();
+  addEventListener('scroll', alScroll, {passive:true});
+  addEventListener('resize', function(){ medirAlto(); pintarScroll(); }, {passive:true});
+  pintarScroll();
+
+  /* --- piezas que se inclinan al pasar el cursor --- */
+  if (!matchMedia('(hover: none)').matches && !matchMedia('(prefers-reduced-motion: reduce)').matches){
+    document.querySelectorAll('.pilar').forEach(function(tar){
+      var dentro = false;
+      tar.addEventListener('mouseenter', function(){
+        dentro = true;
+        // congela la altura actual de la flotación para que no salte
+        var m = new WebKitCSSMatrix(getComputedStyle(tar).transform);
+        tar.style.setProperty('--fy', (m.m42 || 0).toFixed(1) + 'px');
+        tar.classList.add('inclina');
+      });
+      tar.addEventListener('mousemove', function(e){
+        if (!dentro) return;
+        var r = tar.getBoundingClientRect();
+        var px = (e.clientX - r.left) / r.width;
+        var py = (e.clientY - r.top) / r.height;
+        tar.style.setProperty('--ry', ((px - .5) * 13).toFixed(2) + 'deg');
+        tar.style.setProperty('--rx', ((.5 - py) * 11).toFixed(2) + 'deg');
+        tar.style.setProperty('--mx', (px * 100).toFixed(1) + '%');
+        tar.style.setProperty('--my', (py * 100).toFixed(1) + '%');
+      });
+      tar.addEventListener('mouseleave', function(){
+        dentro = false;
+        tar.style.setProperty('--rx', '0deg');
+        tar.style.setProperty('--ry', '0deg');
+        setTimeout(function(){ if (!dentro) tar.classList.remove('inclina'); }, 280);
+      });
+    });
+  }
+
+  /* --- entrada de secciones al aparecer --- */
+  if ('IntersectionObserver' in window){
+    var ojo = new IntersectionObserver(function(filas){
+      filas.forEach(function(f){
+        if (!f.isIntersecting) return;
+        var sec = f.target;
+        sec.classList.add('visible');
+        // escalona los bloques que suben
+        var hijos = sec.querySelectorAll('.sube-al-ver');
+        for (var i = 0; i < hijos.length; i++){
+          hijos[i].style.transitionDelay = Math.min(i * 55, 400) + 'ms';
+        }
+        ojo.unobserve(sec);
+      });
+    }, {rootMargin:'0px 0px -12% 0px', threshold:.12});
+    document.querySelectorAll('.seccion').forEach(function(s){ ojo.observe(s); });
+  } else {
+    document.querySelectorAll('.seccion').forEach(function(s){ s.classList.add('visible'); });
+  }
+})();
+</script>
+<script src="js/texto.js?v=4"></script>
+<script src="js/ui.js?v=4"></script>
+<script src="js/recorrido.js?v=4"></script>
+
+</body>
+</html>
