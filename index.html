@@ -107,21 +107,28 @@ a{color:inherit;text-decoration:none}
 .burger i::before{top:-5px}.burger i::after{top:5px}
 .burger i,.burger i::before,.burger i::after{transition:transform .3s ease,background .3s ease}
 
-/* panel del menú en pantallas chicas: cortina lateral desde la derecha */
-.nav .wrap{position:relative;z-index:3}
+/* panel del menú en pantallas chicas: cortina lateral desde la derecha.
+   Solo la X queda por encima; el resto de la barra (logo incluido)
+   queda detrás del fondo oscurecido */
+.nav .burger{position:relative;z-index:3}
 .menu-panel{
   position:fixed;top:0;right:0;bottom:0;z-index:2;
   width:min(320px,82vw);
   display:flex;flex-direction:column;
-  padding:calc(var(--nav-h) + 1.2rem) clamp(1.5rem,6vw,2.2rem) 2rem;
+  padding:1.5rem clamp(1.5rem,6vw,2.2rem) 1.6rem;
   background:#00040f;border-left:1px solid rgba(255,255,255,.1);
   transform:translateX(100%);visibility:hidden;
   transition:transform .38s cubic-bezier(.22,1,.36,1),visibility 0s linear .38s;
 }
-.nav.abierta{background:#00040f}
 .nav.abierta .menu-panel{transform:none;visibility:visible;transition:transform .38s cubic-bezier(.22,1,.36,1)}
-/* con el menú abierto, en la barra solo quedan el logo y la X */
 .nav.abierta .wrap .btn-wa{opacity:0;pointer-events:none;transition:opacity .25s ease}
+.menu-logo{height:32px;width:auto;align-self:flex-start;margin:.35rem 0 1.9rem}
+.menu-panel .menu-ig{
+  display:flex;align-items:center;gap:.6rem;justify-content:center;
+  margin-top:1.1rem;padding:.4rem 0;border-bottom:none;
+  font-size:.9rem;color:rgba(255,255,255,.6)
+}
+.menu-panel .menu-ig svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:1.6}
 /* fondo oscurecido tras el panel: tocarlo también cierra el menú */
 .menu-fondo{
   position:fixed;top:0;left:0;right:0;bottom:0;z-index:1;
@@ -759,12 +766,14 @@ a{color:inherit;text-decoration:none}
   </div>
   <div class="menu-fondo" id="menuFondo"></div>
   <div class="menu-panel" id="menuPanel">
+    <img class="menu-logo" src="img/logo-a-blanco.png" alt="">
     <a href="#inicio">Inicio</a>
     <a href="#nosotros">Nosotros</a>
     <a href="#servicios">Servicios</a>
     <a href="#casos">Casos</a>
     <a href="#proceso">Proceso</a>
     <a class="btn btn-wa" href="https://wa.me/584245040868" target="_blank" rel="noopener">Hablemos</a>
+    <a class="menu-ig" href="https://instagram.com/alfaagencyy" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r=".9" fill="currentColor" stroke="none"/></svg>@alfaagencyy</a>
   </div>
 </nav>
 
