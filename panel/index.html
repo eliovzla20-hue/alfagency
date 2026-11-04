@@ -4,14 +4,14 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
-<meta name="theme-color" content="#070b16">
+<meta name="theme-color" content="#070b16" id="color-tema">
 <title>Panel de la web · Alfa Agency</title>
 <link rel="icon" href="/panel/logo-a.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400..700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/panel/estilos.css?v=2">
-<script>try { if (localStorage.getItem('alfa-panel-claro') === '1') document.documentElement.classList.add('claro'); if (localStorage.getItem('alfa-panel-plegado') === '1') document.documentElement.classList.add('plegado'); } catch (e) {}</script>
+<link rel="stylesheet" href="/panel/estilos.css?v=3">
+<script>try { var q = (location.search.match(/[?&]tema=(claro|oscuro)/) || [])[1]; if (q) localStorage.setItem('alfa-panel-tema', q); var t = localStorage.getItem('alfa-panel-tema'); if (t === 'claro' || (!t && matchMedia('(prefers-color-scheme: light)').matches)) document.documentElement.classList.add('claro'); if (localStorage.getItem('alfa-panel-plegado') === '1') document.documentElement.classList.add('plegado'); } catch (e) {}</script>
 </head>
 <body>
 <div class="marco">
@@ -28,10 +28,10 @@
         <b id="vivo-num">—</b>
         <span><i class="punto"></i><span id="vivo-txt">últimos 30 minutos</span></span>
       </div>
-      <label class="interruptor">
-        <svg class="ic"><use href="#i-luna"/></svg><span>Vidrio oscuro</span>
-        <input type="checkbox" id="tema" checked><i></i>
-      </label>
+      <div class="tema" id="tema" role="group" aria-label="Apariencia">
+        <button type="button" data-tema="claro" title="Modo claro"><svg class="ic"><use href="#i-sol"/></svg><span>Claro</span></button>
+        <button type="button" data-tema="oscuro" title="Modo oscuro"><svg class="ic"><use href="#i-luna"/></svg><span>Oscuro</span></button>
+      </div>
       <div class="usuario">
         <span class="avatar">AA</span>
         <div><b>Equipo Alfa</b><small>alfaagencyy.com</small></div>
@@ -51,6 +51,10 @@
         <kbd>⌘K</kbd>
         <datalist id="secciones"></datalist>
       </label>
+      <div class="reloj" id="reloj" aria-live="off">
+        <svg class="ic"><use href="#i-calendario"/></svg>
+        <span id="fecha"></span><i></i><b id="hora"></b>
+      </div>
       <div class="barra__acciones">
         <button class="btn-ic redondo" id="refrescar" aria-label="Actualizar datos" title="Actualizar datos"><svg class="ic"><use href="#i-revisar"/></svg></button>
         <a class="btn-ic redondo" href="https://www.alfaagencyy.com/?nomedir" target="_blank" rel="noopener" aria-label="Abrir la web" title="Abrir la web"><svg class="ic"><use href="#i-externo"/></svg></a>
@@ -88,6 +92,8 @@
   <symbol id="i-externo" viewBox="0 0 24 24"><path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></symbol>
   <symbol id="i-menu" viewBox="0 0 24 24"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></symbol>
   <symbol id="i-panel" viewBox="0 0 24 24"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M9 3v18"/></symbol>
+  <symbol id="i-sol" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></symbol>
+  <symbol id="i-chev" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol>
   <symbol id="i-luna" viewBox="0 0 24 24"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></symbol>
   <symbol id="i-mas" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="M12 5v14"/></symbol>
   <symbol id="i-descarga" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m7 10 5 5 5-5"/><path d="M12 15V3"/></symbol>
@@ -108,6 +114,6 @@
   <symbol id="i-capas" viewBox="0 0 24 24"><path d="m12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83Z"/><path d="m22 17.65-9.17 4.16a2 2 0 0 1-1.66 0L2 17.65"/><path d="m22 12.65-9.17 4.16a2 2 0 0 1-1.66 0L2 12.65"/></symbol>
   <symbol id="i-puntos" viewBox="0 0 24 24"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></symbol>
 </svg>
-<script src="/panel/app.js?v=2"></script>
+<script src="/panel/app.js?v=3"></script>
 </body>
 </html>

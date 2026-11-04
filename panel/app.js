@@ -21,6 +21,8 @@
   ];
   var VISTAS = [].concat.apply([], GRUPOS.map(function (g) { return g.vistas; }));
   var SIN_PERIODO = { enlaces: 1, ajustes: 1 };
+  var cerrados = [];
+  try { cerrados = JSON.parse(localStorage.getItem('alfa-panel-grupos') || '[]'); } catch (e) {}
   var estado = { dias: 28, vista: 'resumen', datos: null, cargando: false, error: '' };
   try { estado.dias = +localStorage.getItem('alfa-panel-dias') || 28; } catch (e) {}
 
@@ -62,7 +64,7 @@
   var ZONAS = { inicio: 'Portada', servicios: 'Servicios', contacto: 'Contacto', nosotros: 'Nosotros', proceso: 'Proceso', casos: 'Casos', menu: 'Menú', 'menu movil': 'Menú del teléfono', pie: 'Pie de página' };
   var DIAS = ['Dom', 'Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb'];
   var DIAS_LARGO = ['domingo', 'lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado'];
-  var COLORES = ['#209ff4', '#5ad686', '#d9dde6', '#f7b445', '#9b8cff', '#ff8a63'];
+  var COLORES = ['#209ff4', '#3fc77a', '#9aa6bd', '#f2a93b', '#9b8cff', '#ff8a63'];
 
   /* ── piezas ── */
   function tarjeta(titulo, cuerpo, nota, clase, accion) {
@@ -142,7 +144,7 @@
     var c = curva(pts);
     s += '<path d="' + c + 'L' + x(dias.length - 1) + ' ' + y(0) + 'L' + x(0) + ' ' + y(0) + 'Z" fill="url(#relleno)"/>';
     s += '<path d="' + c + '" fill="none" stroke="url(#trazo)" stroke-width="2.6" stroke-linecap="round" filter="url(#brillo)"/>';
-    s += '<line id="guia" x1="0" x2="0" y1="' + ar + '" y2="' + (ar + h) + '" stroke="#ffffff55" stroke-dasharray="3 4" opacity="0"/><circle id="marca" r="5" fill="#209ff4" stroke="#fff" stroke-width="2" opacity="0"/>';
+    s += '<line id="guia" x1="0" x2="0" y1="' + ar + '" y2="' + (ar + h) + '" stroke="currentColor" style="color:var(--muted-2)" stroke-dasharray="3 4" opacity="0"/><circle id="marca" r="5" fill="#209ff4" stroke="#fff" stroke-width="2" opacity="0"/>';
     var bw = w / Math.max(1, dias.length - 1);
     dias.forEach(function (d, i) { s += '<rect data-i="' + i + '" x="' + (x(i) - bw / 2) + '" y="' + ar + '" width="' + bw + '" height="' + h + '" fill="transparent"/>'; });
     return '<div class="grafica" id="graf-dias"><svg viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="Personas por día"><defs>' +
@@ -430,10 +432,14 @@
   function pintarNav() {
     var a = A(), ahora = a && a.ahora != null ? a.ahora : null;
     var insignias = { resumen: ahora ? '<span class="insignia verde">' + n(ahora) + '</span>' : '', origen: a && a.campanas && a.campanas.length ? '<span class="insignia">' + a.campanas.length + '</span>' : '' };
-    $('#nav').innerHTML = GRUPOS.map(function (g) {
-      return '<h6>' + g.t + '</h6>' + g.vistas.map(function (v) {
-        return '<a href="#' + v.id + '" class="' + (v.id === estado.vista ? 'on' : '') + '" title="' + esc(v.t) + '">' + ic(v.i) + '<span>' + v.t + '</span>' + (insignias[v.id] || '') + '</a>';
-      }).join('');
+    $('#nav').innerHTML = GRUPOS.map(function (g, gi) {
+      var activo = g.vistas.some(function (v) { return v.id === estado.vista; });
+      var abierto = activo || cerrados.indexOf(g.t) === -1;
+      return '<div class="grupo' + (abierto ? ' abierto' : '') + '" data-grupo="' + esc(g.t) + '">' +
+        '<button type="button" class="grupo__boton" aria-expanded="' + abierto + '" aria-controls="grupo-' + gi + '"><span>' + g.t + '</span><em class="grupo__cuenta">' + g.vistas.length + '</em>' + ic('chev') + '</button>' +
+        '<div class="grupo__lista" id="grupo-' + gi + '"><div>' + g.vistas.map(function (v) {
+          return '<a href="#' + v.id + '" class="' + (v.id === estado.vista ? 'on' : '') + '" title="' + esc(v.t) + '"' + (abierto ? '' : ' tabindex="-1"') + '>' + ic(v.i) + '<span>' + v.t + '</span>' + (insignias[v.id] || '') + '</a>';
+        }).join('') + '</div></div></div>';
     }).join('');
     document.querySelectorAll('#periodo button').forEach(function (b) { b.classList.toggle('on', +b.dataset.dias === estado.dias); });
     var sin = SIN_PERIODO[estado.vista];
@@ -445,7 +451,6 @@
     var v = VISTAS.filter(function (x) { return x.id === estado.vista; })[0] || VISTAS[0];
     $('#titulo').textContent = v.t;
     $('#miga-vista').textContent = v.t;
-    $('#miga-saludo').textContent = saludo() + ', equipo';
     var a = A(), sub = v.sub;
     if (v.id === 'resumen' && a && a.totales && a.totales.actual) {
       var t = a.totales.actual;
@@ -507,17 +512,43 @@
   buscar.addEventListener('keydown', function (e) { if (e.key === 'Enter') irPorNombre(); if (e.key === 'Escape') buscar.blur(); });
   document.addEventListener('keydown', function (e) { if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') { e.preventDefault(); buscar.focus(); } });
 
-  /* vidrio oscuro / claro y menú plegado */
-  var raiz = document.documentElement, tema = $('#tema');
-  tema.checked = !raiz.classList.contains('claro');
-  tema.addEventListener('change', function () {
-    raiz.classList.toggle('claro', !tema.checked);
-    try { localStorage.setItem('alfa-panel-claro', tema.checked ? '0' : '1'); } catch (e) {}
-  });
+  /* modo claro / oscuro y menú plegado */
+  var raiz = document.documentElement;
+  function ponerTema(t, guardar) {
+    raiz.classList.toggle('claro', t === 'claro');
+    document.querySelectorAll('#tema button').forEach(function (b) { b.classList.toggle('on', b.dataset.tema === t); b.setAttribute('aria-pressed', b.dataset.tema === t); });
+    $('#color-tema').setAttribute('content', t === 'claro' ? '#eaf0f8' : '#070b16');
+    if (guardar) try { localStorage.setItem('alfa-panel-tema', t); } catch (e) {}
+    if (estado.datos) pintar();
+  }
+  document.querySelectorAll('#tema button').forEach(function (b) { b.onclick = function () { ponerTema(b.dataset.tema, true); }; });
+  ponerTema(raiz.classList.contains('claro') ? 'claro' : 'oscuro', false);
   $('#plegar').onclick = function () {
     raiz.classList.toggle('plegado');
     try { localStorage.setItem('alfa-panel-plegado', raiz.classList.contains('plegado') ? '1' : '0'); } catch (e) {}
   };
+
+  $('#nav').addEventListener('click', function (e) {
+    var b = e.target.closest('.grupo__boton'); if (!b) return;
+    var g = b.parentNode, abierto = !g.classList.contains('abierto');
+    g.classList.toggle('abierto', abierto); b.setAttribute('aria-expanded', abierto);
+    g.querySelectorAll('a').forEach(function (a) { if (abierto) a.removeAttribute('tabindex'); else a.setAttribute('tabindex', '-1'); });
+    var nombre = g.dataset.grupo;
+    cerrados = cerrados.filter(function (x) { return x !== nombre; });
+    if (!abierto) cerrados.push(nombre);
+    try { localStorage.setItem('alfa-panel-grupos', JSON.stringify(cerrados)); } catch (x) {}
+  });
+
+  /* fecha y hora del dispositivo, al minuto */
+  function reloj() {
+    var ahora = new Date(), corto = matchMedia('(max-width: 900px)').matches;
+    $('#fecha').textContent = ahora.toLocaleDateString('es-VE', corto ? { weekday: 'short', day: 'numeric', month: 'short' } : { weekday: 'long', day: 'numeric', month: 'long' }).replace('.', '').replace(/,/g, '');
+    $('#hora').textContent = ahora.toLocaleTimeString('es-VE', { hour: 'numeric', minute: '2-digit' });
+    $('#miga-saludo').textContent = saludo() + ', equipo';
+  }
+  reloj();
+  setTimeout(function () { reloj(); setInterval(reloj, 60000); }, (60 - new Date().getSeconds()) * 1000);
+  addEventListener('resize', reloj);
 
   $('#abrir-menu').onclick = function () { $('#lateral').classList.add('abierto'); $('#velo').classList.add('ver'); };
   $('#velo').onclick = cerrarMenu;
