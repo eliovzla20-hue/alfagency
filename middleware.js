@@ -11,7 +11,7 @@ async function sha(txt) {
 }
 
 const ABIERTO = ['/panel/entrar', '/api/panel/entrar', '/api/panel/salir', 
-  '/panel/estilos.css', '/panel/logo-a.png', '/panel/logo-alfa.png'];
+  '/panel/estilos.css', '/panel/logo-a.png', '/panel/logo-alfa-blanco.png'];
 
 export default async function middleware(request) {
   const url = new URL(request.url);
