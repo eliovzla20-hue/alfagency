@@ -17,3 +17,4 @@ node_modules/
 # Panel local
 .env.local
 .vercel
+.env*
