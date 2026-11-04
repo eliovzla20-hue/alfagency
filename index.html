@@ -543,6 +543,9 @@ a{color:inherit;text-decoration:none}
 .pie img{height:38px;width:auto;margin:0 auto 1rem;filter:brightness(0) invert(1);opacity:.9}
 .pie p{color:rgba(255,255,255,.6);font-size:.9rem;margin:0 auto}
 .pie .legal{margin-top:1.4rem;font-size:.72rem;color:rgba(255,255,255,.4)}
+/* acceso discreto al panel del equipo: el © del pie, sin que se note */
+.pie .acceso{color:inherit;text-decoration:none;cursor:default;border-radius:3px}
+.pie .acceso:focus-visible{outline:1px solid rgba(255,255,255,.5);outline-offset:2px}
 
 
 /* ---------- barra de avance de lectura ---------- */
@@ -1043,7 +1046,7 @@ a{color:inherit;text-decoration:none}
     <div class="pie">
       <img src="img/logo-alfa-agency.png" alt="Alfa Agency">
       <p>Guiar y potenciar tu futuro.</p>
-      <div class="legal">© <span id="yr">2026</span> Alfa Agency · Imágenes espaciales: NASA, dominio público</div>
+      <div class="legal"><a class="acceso" href="/panel/entrar/" rel="nofollow" aria-label="Acceso del equipo">©</a> <span id="yr">2026</span> Alfa Agency · Imágenes espaciales: NASA, dominio público</div>
     </div>
   </div>
 </section>
