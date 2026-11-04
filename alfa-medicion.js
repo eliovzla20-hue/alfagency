@@ -9,7 +9,7 @@
 (function () {
   'use strict';
 
-  var GA = '';      // p. ej. 'G-XXXXXXXXXX'
+  var GA = 'G-1X8JQ1JE2K';      // p. ej. 'G-XXXXXXXXXX'
   var PIXEL = '';   // p. ej. '123456789012345'
 
   if (window.__alfaMedicion) return;
