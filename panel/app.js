@@ -5,17 +5,17 @@
 
   var $ = function (s, el) { return (el || document).querySelector(s); };
   var GRUPOS = [
-    { t: 'Datos', vistas: [
+    { t: 'Datos', i: 'grafica', vistas: [
       { id: 'resumen', t: 'Resumen', i: 'resumen', sub: 'Cuántas personas visitan la web y cuántas terminan escribiendo' },
       { id: 'origen', t: 'De dónde llegan', i: 'origen', sub: 'Redes, anuncios, Google y enlaces directos' },
       { id: 'publico', t: 'Público', i: 'publico', sub: 'Dónde están, con qué entran y a qué hora' },
       { id: 'interes', t: 'Qué les interesa', i: 'interes', sub: 'Secciones, servicios y botones que tocan' },
       { id: 'google', t: 'Búsquedas en Google', i: 'google', sub: 'Qué buscan las personas antes de llegar a la web' },
     ] },
-    { t: 'Herramientas', vistas: [
+    { t: 'Herramientas', i: 'herramienta', vistas: [
       { id: 'enlaces', t: 'Enlaces para anuncios', i: 'enlace', sub: 'Crea enlaces que el panel reconoce por campaña' },
     ] },
-    { t: 'Cuenta', vistas: [
+    { t: 'Cuenta', i: 'cuenta', vistas: [
       { id: 'ajustes', t: 'Configuración', i: 'ajustes', sub: 'Conexión con Google y Meta' },
     ] },
   ];
@@ -436,7 +436,7 @@
       var activo = g.vistas.some(function (v) { return v.id === estado.vista; });
       var abierto = activo || cerrados.indexOf(g.t) === -1;
       return '<div class="grupo' + (abierto ? ' abierto' : '') + '" data-grupo="' + esc(g.t) + '">' +
-        '<button type="button" class="grupo__boton" aria-expanded="' + abierto + '" aria-controls="grupo-' + gi + '"><span>' + g.t + '</span><em class="grupo__cuenta">' + g.vistas.length + '</em>' + ic('chev') + '</button>' +
+        '<button type="button" class="grupo__boton" aria-expanded="' + abierto + '" aria-controls="grupo-' + gi + '" title="' + esc(g.t) + '"><span class="grupo__ic">' + ic(g.i) + '</span><span class="grupo__txt">' + g.t + '</span><span class="grupo__cuenta">' + g.vistas.length + '</span></button>' +
         '<div class="grupo__lista" id="grupo-' + gi + '"><div>' + g.vistas.map(function (v) {
           return '<a href="#' + v.id + '" class="' + (v.id === estado.vista ? 'on' : '') + '" title="' + esc(v.t) + '"' + (abierto ? '' : ' tabindex="-1"') + '>' + ic(v.i) + '<span>' + v.t + '</span>' + (insignias[v.id] || '') + '</a>';
         }).join('') + '</div></div></div>';
