@@ -1,0 +1,8 @@
+{
+  "name": "alfagency",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "panel": "node panel-dev.mjs"
+  }
+}
