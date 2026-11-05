@@ -125,4 +125,15 @@
       scrollTo({ top: riel.offsetTop + porPanel * i, behavior: "smooth" });
     });
   });
+
+  /* al llegar desde otra página con /#servicios, /#casos…: ir al panel correcto */
+  function irAlAncla() {
+    var destino = location.hash && document.getElementById(location.hash.slice(1));
+    if (!destino || !activo || !pista.contains(destino)) return;
+    var i = paneles.indexOf(destino);
+    if (i < 0) return;
+    var porPanel = (riel.offsetHeight - innerHeight) / (paneles.length - 1 || 1);
+    scrollTo({ top: riel.offsetTop + porPanel * i, behavior: "auto" });
+  }
+  addEventListener("load", function () { setTimeout(irAlAncla, 300); });
 })();
