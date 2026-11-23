@@ -118,6 +118,31 @@ a{color:inherit;text-decoration:none}
   border-color:rgba(255,255,255,.26);color:#fff;background:rgba(255,255,255,.08);
 }
 .btn-vidrio:hover{background:rgba(255,255,255,.14);border-color:rgba(255,255,255,.5);transform:translateY(-2px)}
+/* Entrar al sistema (23-nov-2026): el mismo acceso de Orka Lab, vestido de
+   Alfa. «Soy cliente» abre el panel del cliente con la piel de Alfa; «Soy del
+   equipo» va al sistema de trabajo, igual que desde la web de Orka. */
+.nav-der{display:flex;align-items:center;gap:.7rem}
+.entrar-menu{position:relative;display:none}
+@media(min-width:960px){.entrar-menu{display:block}}
+.btn.entrar{padding:.8rem 1.15rem}
+.btn.entrar svg{fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.entrar-menu.abierto .btn.entrar{background:rgba(255,255,255,.16);border-color:rgba(255,255,255,.5)}
+.entrar-opciones{
+  position:absolute;top:calc(100% + 12px);right:0;min-width:292px;display:grid;gap:4px;padding:8px;
+  background:rgba(0,8,26,.94);border:1px solid rgba(255,255,255,.12);border-radius:20px;
+  backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);box-shadow:0 22px 54px rgba(0,0,0,.5);
+  opacity:0;visibility:hidden;transform:translateY(-6px);transition:opacity .2s,transform .2s,visibility 0s .2s;
+}
+.entrar-menu.abierto .entrar-opciones{opacity:1;visibility:visible;transform:none;transition:opacity .2s,transform .2s}
+.entrar-opciones a{display:grid;gap:3px;padding:12px 16px;border-radius:14px;color:#fff;transition:background .2s}
+.entrar-opciones a:hover,.entrar-opciones a:focus-visible{background:rgba(32,159,244,.14)}
+.entrar-opciones strong{font-size:.9rem;font-weight:600}
+.entrar-opciones small{font-size:.76rem;color:rgba(255,255,255,.58)}
+.entrar-opciones .cliente strong{color:var(--light-blue)}
+.menu-entrar{display:grid;margin-top:1.2rem;border-top:1px solid rgba(255,255,255,.1);padding-top:.9rem}
+.menu-entrar span{font-size:.68rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.45);padding-bottom:.2rem}
+.menu-panel .menu-entrar a{padding:.85rem 0}
+.menu-panel .menu-entrar a:first-of-type{color:var(--light-blue)}
 .burger{display:grid;place-items:center;width:44px;height:44px;background:none;border:1px solid rgba(255,255,255,.22);border-radius:12px;cursor:pointer}
 @media(min-width:960px){.burger{display:none}}
 .burger i{display:block;width:17px;height:1.5px;background:#fff;position:relative}
@@ -139,7 +164,7 @@ a{color:inherit;text-decoration:none}
   transition:transform .38s cubic-bezier(.22,1,.36,1),visibility 0s linear .38s;
 }
 .nav.abierta .menu-panel{transform:none;visibility:visible;transition:transform .38s cubic-bezier(.22,1,.36,1)}
-.nav.abierta .wrap .btn-wa{opacity:0;pointer-events:none;transition:opacity .25s ease}
+.nav.abierta .wrap .nav-der{opacity:0;pointer-events:none;transition:opacity .25s ease}
 .menu-logo{height:32px;width:auto;align-self:flex-start;margin:.35rem 0 1.9rem}
 .menu-panel .menu-ig{
   display:flex;align-items:center;gap:.6rem;justify-content:center;
@@ -867,7 +892,16 @@ a{color:inherit;text-decoration:none}
       <li><a href="#proceso">Proceso</a></li>
       <li><a href="/precios/">Precios</a></li>
     </ul>
-    <a class="btn btn-wa" href="https://wa.me/584245040868" target="_blank" rel="noopener">Hablemos</a>
+    <div class="nav-der">
+      <div class="entrar-menu">
+        <button class="btn btn-vidrio entrar" type="button" aria-haspopup="menu" aria-expanded="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><path d="M10 17l5-5-5-5"/><path d="M15 12H3"/></svg>Entrar</button>
+        <div class="entrar-opciones" role="menu" aria-label="Elige tu acceso">
+          <a class="cliente" role="menuitem" href="https://clientes.orkalab.app/entrar?agencia=alfa"><strong>Soy cliente</strong><small>Panel con los resultados de tu marca</small></a>
+          <a role="menuitem" href="https://app.orkalab.app/login?agencia=alfa"><strong>Soy del equipo</strong><small>Sistema de trabajo del equipo</small></a>
+        </div>
+      </div>
+      <a class="btn btn-wa" href="https://wa.me/584245040868" target="_blank" rel="noopener">Hablemos</a>
+    </div>
     <button class="burger" aria-label="Menú" aria-expanded="false" aria-controls="menuPanel"><i></i></button>
   </div>
   <div class="menu-fondo" id="menuFondo"></div>
@@ -879,6 +913,11 @@ a{color:inherit;text-decoration:none}
     <a href="#casos">Casos</a>
     <a href="#proceso">Proceso</a>
     <a href="/precios/">Precios</a>
+    <div class="menu-entrar" aria-label="Entrar al sistema">
+      <span>Entrar</span>
+      <a href="https://clientes.orkalab.app/entrar?agencia=alfa">Soy cliente</a>
+      <a href="https://app.orkalab.app/login?agencia=alfa">Soy del equipo</a>
+    </div>
     <a class="btn btn-wa" href="https://wa.me/584245040868" target="_blank" rel="noopener">Hablemos</a>
     <a class="menu-ig" href="https://instagram.com/alfaagencyy" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r=".9" fill="currentColor" stroke="none"/></svg>@alfaagencyy</a>
   </div>
@@ -1369,6 +1408,18 @@ a{color:inherit;text-decoration:none}
   </div>
 </dialog>
 
+<script>
+/* Menú «Entrar»: se abre con clic, se cierra al tocar fuera o con Escape. */
+(function(){
+  var m=document.querySelector('.entrar-menu');if(!m)return;
+  var b=m.querySelector('button');
+  function abrir(){m.classList.add('abierto');b.setAttribute('aria-expanded','true')}
+  function cerrar(){m.classList.remove('abierto');b.setAttribute('aria-expanded','false')}
+  b.addEventListener('click',function(e){e.stopPropagation();m.classList.contains('abierto')?cerrar():abrir()});
+  document.addEventListener('click',function(e){if(!m.contains(e.target))cerrar()});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&m.classList.contains('abierto')){cerrar();b.focus()}});
+})();
+</script>
 <script src="js/texto.js?v=5"></script>
 <script src="js/ui.js?v=7"></script>
 <script src="js/recorrido.js?v=6"></script>
