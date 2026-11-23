@@ -2,7 +2,7 @@
    Recorrido horizontal — Alfa Agency
    El scroll vertical desplaza las secciones hacia la derecha.
    La última (Contacto) vuelve al comportamiento normal.
-   Bajo 981px no se activa: en móvil todo baja como siempre.
+   Bajo 1200px no se activa: en móvil todo baja como siempre.
 
    Cómo se mueve la pista:
    · Si el navegador admite animaciones ligadas al scroll, el
@@ -26,7 +26,7 @@
   var inicioRiel = 0, altoUtil = 1, pendiente = false;
 
   function esEscritorio() {
-    return matchMedia("(min-width: 981px)").matches;
+    return matchMedia("(min-width: 1200px)").matches;
   }
 
   function medir() {

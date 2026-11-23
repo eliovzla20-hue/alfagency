@@ -407,7 +407,7 @@ a{color:inherit;text-decoration:none}
 .casos{padding:clamp(4.5rem,11vw,9rem) 0 clamp(5rem,12vw,10rem)}
 .casos-grid{display:grid;gap:1.3rem;margin-top:clamp(2.2rem,5vw,3.4rem);perspective:1200px}
 @media(min-width:900px){.casos-grid{grid-template-columns:1fr 1fr}.caso.principal{grid-column:1/-1;display:grid;grid-template-columns:1.15fr 1fr;align-items:stretch}}
-@media(min-width:900px) and (max-width:980px){.caso-cuarto{grid-column:1/-1}}
+@media(min-width:900px) and (max-width:1199px){#proyectos .casos-grid{grid-template-columns:repeat(3,1fr)}}
 .caso{
   position:relative;border:1px solid rgba(255,255,255,.12);border-radius:24px;overflow:hidden;
   background:linear-gradient(158deg,rgba(4,16,44,.68),rgba(2,10,30,.5));
@@ -591,7 +591,7 @@ a{color:inherit;text-decoration:none}
    Las cinco primeras secciones viajan de izquierda a derecha
    mientras se hace scroll; Contacto vuelve a ser vertical.
    Bajo 980px todo vuelve al desplazamiento normal. */
-@media(min-width:981px){
+@media(min-width:1200px){
   /* clip y no hidden: la pista no debe dar scroll lateral a la página
      (un ancla en la dirección la empujaba y dejaba una franja vacía) */
   .riel{position:relative;overflow-x:clip}
@@ -654,6 +654,7 @@ a{color:inherit;text-decoration:none}
   .pista .svc-body h3{font-size:clamp(1.1rem,1.8vw,1.45rem);margin:.5rem 0 .6rem}
   .pista .svc-body p{font-size:.88rem;line-height:1.6;margin-bottom:1rem}
   .pista .casos-grid{margin-top:1.4rem;gap:.9rem;grid-template-columns:1.15fr 1fr 1fr 1fr}
+  .pista #casos .casos-grid{grid-template-columns:1.25fr 1fr 1fr}
   .pista .caso.principal{grid-column:auto;display:flex;flex-direction:column}
   .pista .caso-art{min-height:clamp(140px,15vw,210px);height:clamp(140px,15vw,210px);flex:none}
   .pista .caso-art.marco{height:auto;min-height:0}
@@ -689,7 +690,7 @@ a{color:inherit;text-decoration:none}
   .clara-visible .brujula i{background:rgba(6,21,41,.2)}
   .clara-visible .brujula i.on{background:var(--king-blue)}
 }
-@media(max-width:980px){
+@media(max-width:1199px){
   .pista{display:block}
   .brujula{display:none}
 }
@@ -811,19 +812,30 @@ a{color:inherit;text-decoration:none}
   background:#25d366;color:#04331a;font-size:.9rem;font-weight:700;text-align:center;
 }
 .vc-cta:hover{background:#2fe072}
-/* portátiles de poca altura: los dos paneles de casos caben sin recortarse */
-@media(min-width:981px) and (max-height:800px){
-  .pista .casos .h2{font-size:clamp(1.7rem,3.3vw,2.5rem)}
-  .pista .casos .lead{margin-top:.5rem;font-size:.92rem;line-height:1.5}
-  .pista .casos .casos-grid{margin-top:.9rem}
-  .pista .casos .caso-art{min-height:120px;height:120px}
-  .pista .casos .caso-art.marco{height:auto}
-  .pista .casos .caso-art.marco .vp{height:92px}
-  .pista .casos .caso:hover .caso-art.marco .vp img{transform:translateY(calc(-100% + 92px))}
-  .pista .casos .caso-txt{padding:.8rem 1rem;gap:.25rem}
-  .pista .casos .caso-txt p{font-size:.8rem;line-height:1.45}
-  .pista .casos .caso-txt .logro{font-size:.9rem;line-height:1.35}
-  .pista .casos .caso-logo{height:26px}
+/* paneles de casos: título y entrada lado a lado para que las tarjetas
+   quepan con la letra a tamaño normal y con aire sobre los indicadores */
+@media(min-width:1200px){
+  .pista .casos > .wrap{display:grid;grid-template-columns:auto minmax(0,1fr);column-gap:clamp(2rem,5vw,5rem);align-items:end}
+  .pista .casos > .wrap > .eyebrow,.pista .casos > .wrap > .casos-grid{grid-column:1/-1}
+  .pista .casos > .wrap > .lead{margin:0 0 .4rem;max-width:44ch}
+  .pista .casos > .wrap > .eyebrow{justify-self:start}
+  .pista .casos .caso-logo{height:30px}
+  .pista .casos > .wrap{width:min(1320px,92vw)}
+}
+@media(min-width:1200px){
+  /* la imagen se ajusta al alto de la pantalla; la letra no cambia */
+  .pista .casos{--arte:clamp(84px,calc(40vh - 190px),200px)}
+  .pista .casos .caso-art{min-height:var(--arte);height:var(--arte)}
+  .pista .casos .caso-art.marco{height:auto;min-height:0}
+  .pista .casos .caso-art.marco .vp{height:calc(var(--arte) - 66px)}
+  .pista .casos .caso:hover .caso-art.marco .vp img{transform:translateY(calc(-100% + var(--arte) - 66px))}
+}
+@media(min-width:1200px) and (max-height:800px){
+  .pista .casos .h2{font-size:clamp(1.9rem,3.4vw,2.7rem)}
+  .pista .casos .casos-grid{margin-top:1.1rem}
+  .pista .seccion.casos{padding-top:calc(var(--nav-h) + .25rem)}
+  .pista .casos .eyebrow{margin-bottom:.6rem}
+  .pista .casos .h2{margin-top:0}
 }
 @media(prefers-reduced-motion:reduce){.ventana-caso[open],.ventana-caso[open]::backdrop{animation:none}}
 </style>
@@ -987,31 +999,15 @@ a{color:inherit;text-decoration:none}
   <div class="wrap">
     <div class="eyebrow sube-al-ver" data-decodificar>Casos de éxito</div>
     <h2 class="h2 perspectiva">
-      <span class="rev"><span data-letras="60">Cuatro marcas,</span></span>
-      <span class="rev"><span data-letras="280">cuatro formas de</span></span>
+      <span class="rev"><span data-letras="60">Tres marcas,</span></span>
+      <span class="rev"><span data-letras="280">tres formas de</span></span>
       <span class="rev"><span><em data-grad data-letras="520">generar impacto</em>.</span></span>
     </h2>
     <p class="lead sube-al-ver">Cada proyecto tiene su propio reto. Nuestro trabajo es encontrar la esencia, ordenarla visualmente y convertirla en una presencia que las personas recuerden.</p>
 
     <div class="casos-grid">
-      <article class="caso principal sube-al-ver">
-        <span class="lustre" aria-hidden="true"></span>
-        <div class="caso-art marco cortina">
-          <div class="chrome" aria-hidden="true"><span></span><span></span><span></span><i>frescovenezuela.com</i></div>
-          <div class="vp"><img src="img/caso-fresco-recorrido.jpeg" alt="Sitio web de Fresco" loading="lazy"><span class="prog" aria-hidden="true"></span></div>
-        </div>
-        <div class="caso-txt">
-          <div class="cat">Panadería · Página web</div>
-          <img class="caso-logo" src="img/logo-fresco.png" alt="Fresco">
-          <div class="logro">Catálogo de 16 productos con pedido directo</div>
-          <p>Diseñamos y desarrollamos su casa digital: catálogo filtrable por línea, recetas, zona de aliados comerciales y contacto inmediato por WhatsApp.</p>
-          <a class="visita" href="https://frescovenezuela.com" target="_blank" rel="noopener">Ver el sitio
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg>
-          </a>
-        </div>
-      </article>
 
-      <article class="caso sube-al-ver">
+      <article class="caso principal sube-al-ver">
         <span class="lustre" aria-hidden="true"></span>
         <div class="caso-art cortina"><img src="img/caso-la-pizarra.webp" alt="Publicaciones de La Pizarra" loading="lazy"><span class="marca">La Pizarra</span></div>
         <div class="caso-txt">
@@ -1038,14 +1034,14 @@ a{color:inherit;text-decoration:none}
           </a>
         </div>
       </article>
-      <article class="caso caso-cuarto sube-al-ver">
+      <article class="caso sube-al-ver">
         <span class="lustre" aria-hidden="true"></span>
         <div class="caso-art cortina"><img src="img/caso-damalen.webp" alt="Publicaciones de Damalen" loading="lazy"><span class="marca">Damalen</span></div>
         <div class="caso-txt">
           <div class="cat">Belleza y cuidado personal</div>
           <h3>Damalen</h3>
           <div class="logro">Reels que llegan al doble de sus seguidores</div>
-          <p>Contenido que enseña a usar cada producto: rutinas capilares, lanzamientos y piezas con las marcas que distribuye, grabadas y diseñadas por nuestro equipo.</p>
+          <p>Contenido que enseña a usar cada producto: rutinas, lanzamientos y piezas con las marcas que distribuye.</p>
           <a class="visita" href="https://www.instagram.com/inversionesdamalen/" target="_blank" rel="noopener">
             <svg viewBox="0 0 24 24" aria-hidden="true" style="fill:none;stroke:currentColor;stroke-width:1.9"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r=".9" style="fill:currentColor;stroke:none"/></svg>@inversionesdamalen
           </a>
@@ -1065,7 +1061,7 @@ a{color:inherit;text-decoration:none}
       <span class="rev"><span data-letras="280">al sistema que</span></span>
       <span class="rev"><span><em data-grad data-letras="520">mueve el negocio</em>.</span></span>
     </h2>
-    <p class="lead sube-al-ver">Sitios institucionales, plataformas de audio y sistemas internos hechos a la medida de cómo trabaja cada organización.</p>
+    <p class="lead sube-al-ver">Páginas web para negocios, sitios institucionales, plataformas de audio y sistemas internos hechos a la medida de cómo trabaja cada organización.</p>
 
     <div class="casos-grid">
       <article class="caso principal sube-al-ver">
@@ -1078,8 +1074,25 @@ a{color:inherit;text-decoration:none}
           <div class="cat">Universidad · Web institucional</div>
           <h3>Universidad Yacambú</h3>
           <div class="logro">Web oficial con más de 100 páginas</div>
-          <p>Rediseñamos el sitio de la universidad: carreras, trámites del estudiante y notas de prensa en una web más clara y rápida, pensada también para el teléfono.</p>
+          <p>Carreras, trámites y notas de prensa en una web más clara y rápida, pensada también para el teléfono.</p>
           <a class="visita" href="https://www.uny.edu.ve" target="_blank" rel="noopener">Ver el sitio
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg>
+          </a>
+        </div>
+      </article>
+
+      <article class="caso sube-al-ver">
+        <span class="lustre" aria-hidden="true"></span>
+        <div class="caso-art marco cortina">
+          <div class="chrome" aria-hidden="true"><span></span><span></span><span></span><i>frescovenezuela.com</i></div>
+          <div class="vp"><img src="img/caso-fresco-recorrido.jpeg" alt="Sitio web de Fresco" loading="lazy"><span class="prog" aria-hidden="true"></span></div>
+        </div>
+        <div class="caso-txt">
+          <div class="cat">Panadería · Página web</div>
+          <img class="caso-logo" src="img/logo-fresco.png" alt="Fresco">
+          <div class="logro">Catálogo de 16 productos con pedido directo</div>
+          <p>Su casa digital: catálogo por línea, recetas, zona de aliados y pedidos directos por WhatsApp.</p>
+          <a class="visita" href="https://frescovenezuela.com" target="_blank" rel="noopener">Ver el sitio
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg>
           </a>
         </div>
@@ -1092,14 +1105,14 @@ a{color:inherit;text-decoration:none}
           <div class="cat">Medios · Plataforma de audio</div>
           <h3>UNY Radio</h3>
           <div class="logro">La emisora de la universidad, a un clic</div>
-          <p>Una página propia para la señal en vivo y un botón dentro de la web oficial para escucharla mientras se navega.</p>
+          <p>Señal en vivo con página propia y un botón en la web oficial para escucharla.</p>
           <a class="visita" href="https://uny-radio.vercel.app" target="_blank" rel="noopener">Escuchar la radio
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg>
           </a>
         </div>
       </article>
 
-      <article class="caso caso-privado sube-al-ver">
+      <article class="caso caso-privado caso-cuarto sube-al-ver">
         <span class="lustre" aria-hidden="true"></span>
         <div class="caso-art marco cortina">
           <div class="chrome" aria-hidden="true"><span></span><span></span><span></span><i><svg viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 018 0v3"/></svg>Plataforma privada</i></div>
@@ -1109,7 +1122,7 @@ a{color:inherit;text-decoration:none}
           <div class="cat">Repuestos · Sistema a medida</div>
           <h3>Todo Para Su JAC</h3>
           <div class="logro">Una sola bandeja de WhatsApp</div>
-          <p>Un sistema con asistente inteligente para que ningún cliente quede sin respuesta ni sin seguimiento.</p>
+          <p>Un asistente inteligente para que ningún cliente quede sin respuesta ni seguimiento.</p>
           <button class="visita abrir-caso" type="button" data-ventana="ventanaJac" aria-haspopup="dialog">Ver cómo lo resolvimos
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
           </button>
