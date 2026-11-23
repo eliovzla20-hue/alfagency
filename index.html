@@ -24,7 +24,7 @@
 <script type="application/ld+json">
 {"@context": "https://schema.org", "@graph": [{"@type": "ProfessionalService", "@id": "https://www.alfaagencyy.com/#agencia", "name": "Alfa Agency", "url": "https://www.alfaagencyy.com/", "logo": "https://www.alfaagencyy.com/img/logo-alfa-agency.png", "image": "https://www.alfaagencyy.com/img/og-alfa-agency.jpg", "description": "Agencia de marketing digital en Barquisimeto, Venezuela: manejo de redes sociales, community manager, diseño de páginas web, branding y publicidad en Instagram y Facebook.", "telephone": "+584245040868", "email": "Alfaagencyy@gmail.com", "priceRange": "$$", "address": {"@type": "PostalAddress", "addressLocality": "Barquisimeto", "addressRegion": "Lara", "addressCountry": "VE"}, "areaServed": [{"@type": "City", "name": "Barquisimeto"}, {"@type": "State", "name": "Lara"}, {"@type": "Country", "name": "Venezuela"}], "knowsAbout": ["marketing digital", "manejo de redes sociales", "community manager", "diseño web", "branding", "diseño de logo", "Meta Ads", "publicidad en Instagram"], "sameAs": ["https://instagram.com/alfaagencyy"], "hasOfferCatalog": {"@type": "OfferCatalog", "name": "Servicios de Alfa Agency", "itemListElement": [{"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Manejo de redes sociales", "url": "https://www.alfaagencyy.com/servicios/redes-sociales/"}}, {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Diseño de páginas web", "url": "https://www.alfaagencyy.com/servicios/paginas-web/"}}, {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Branding y diseño de logo", "url": "https://www.alfaagencyy.com/servicios/branding-identidad-visual/"}}, {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Publicidad en Instagram y Facebook", "url": "https://www.alfaagencyy.com/servicios/publicidad-meta-ads/"}}]}}, {"@type": "WebSite", "@id": "https://www.alfaagencyy.com/#web", "url": "https://www.alfaagencyy.com/", "name": "Alfa Agency", "inLanguage": "es-VE", "publisher": {"@id": "https://www.alfaagencyy.com/#agencia"}}]}
 </script>
-<script src="/alfa-medicion.js?v=1" async></script>
+<script src="/alfa-medicion.js?v=2" async></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,900;1,900&display=swap" rel="stylesheet">
@@ -591,7 +591,9 @@ a{color:inherit;text-decoration:none}
    mientras se hace scroll; Contacto vuelve a ser vertical.
    Bajo 980px todo vuelve al desplazamiento normal. */
 @media(min-width:981px){
-  .riel{position:relative}
+  /* clip y no hidden: la pista no debe dar scroll lateral a la página
+     (un ancla en la dirección la empujaba y dejaba una franja vacía) */
+  .riel{position:relative;overflow-x:clip}
   .pista{
     position:sticky;top:0;height:100vh;display:flex;align-items:stretch;
     width:max-content;
@@ -656,6 +658,8 @@ a{color:inherit;text-decoration:none}
   .pista .caso-art.marco{height:auto;min-height:0}
   .pista .caso-txt{flex:1}
   .pista .caso-art.marco .vp{height:clamp(120px,13vw,180px)}
+  /* el recorrido llega hasta el final de la imagen a esta altura */
+  .pista .caso:hover .caso-art.marco .vp img{transform:translateY(calc(-100% + clamp(120px,13vw,180px)))}
   .pista .caso-txt{padding:1rem 1.1rem;gap:.35rem}
   .pista .caso-txt p{font-size:.84rem;line-height:1.55}
   .pista .caso-txt h3{font-size:1.1rem}
@@ -761,6 +765,62 @@ a{color:inherit;text-decoration:none}
   .destella .ltr{animation:none}
 }
 
+
+/* ---------- proyectos digitales: tarjeta privada y su ventana ---------- */
+.caso-privado{position:relative}
+.chrome i svg{width:11px;height:11px;margin-right:.3rem;vertical-align:-1px;fill:none;stroke:currentColor;stroke-width:2.2}
+.abrir-caso{background:none;border-width:0 0 1px;padding-left:0;padding-right:0;font-family:inherit;cursor:pointer}
+/* toda la tarjeta abre la ventana */
+.abrir-caso::after{content:"";position:absolute;inset:0;border-radius:24px;z-index:4}
+.abrir-caso:focus-visible::after{outline:2px solid var(--light-blue);outline-offset:3px}
+
+.ventana-caso{
+  width:min(520px,calc(100vw - 1.5rem));max-height:min(90dvh,760px);
+  margin:auto;padding:0;border:0;border-radius:22px;
+  background:#fff;color:#4d6182;overflow:hidden;
+  box-shadow:0 28px 70px -24px rgba(0,20,60,.65);
+}
+.ventana-caso::backdrop{background:rgba(0,12,34,.58)}
+.ventana-caso[open]{display:flex;flex-direction:column;animation:abrirCaso .26s cubic-bezier(.22,1,.36,1)}
+.ventana-caso[open]::backdrop{animation:velarCaso .26s ease}
+@keyframes abrirCaso{from{opacity:0;transform:translateY(12px) scale(.97)}}
+@keyframes velarCaso{from{opacity:0}}
+.vc-cuerpo{overflow-y:auto;overscroll-behavior:contain;padding:1.6rem 1.7rem .9rem}
+.vc-pie{flex:none;padding:.75rem 1.7rem 1.15rem;border-top:1px solid rgba(10,26,51,.1)}
+.vc-cerrar{
+  position:absolute;top:.8rem;right:.8rem;z-index:2;width:40px;height:40px;
+  display:grid;place-items:center;border:0;border-radius:50%;
+  background:#eef4fb;color:var(--dark-blue);cursor:pointer;transition:background .2s;
+}
+.vc-cerrar:hover{background:#dcebfa}
+.vc-cerrar svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round}
+.vc-logo{height:40px;width:auto;display:block;margin-bottom:.8rem}
+.vc-cat{font-size:.64rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--king-blue)}
+.ventana-caso h3{margin:.3rem 0 .75rem;padding-right:2.4rem;color:#061529;font-size:clamp(1.25rem,4.5vw,1.5rem);font-weight:900;letter-spacing:-.02em;line-height:1.2}
+.ventana-caso h4{margin:1.05rem 0 .35rem;color:var(--king-blue);font-size:.9rem;font-weight:700}
+.ventana-caso p{font-size:.9rem;line-height:1.6}
+.vc-puntos{list-style:none;margin:.5rem 0 0;padding:0;display:grid;gap:.7rem}
+.vc-puntos li{display:grid;grid-template-columns:32px 1fr;gap:.7rem;font-size:.87rem;line-height:1.5}
+.vc-puntos strong{display:block;color:#061529;font-weight:600}
+.vc-ic{width:32px;height:32px;display:grid;place-items:center;border-radius:10px;background:#e8f3fd;color:var(--king-blue)}
+.vc-ic svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.vc-nota{margin-top:1rem;font-size:.76rem!important;color:#66788f}
+.vc-cta{
+  display:flex;justify-content:center;padding:.8rem 1rem;border-radius:999px;
+  background:#25d366;color:#04331a;font-size:.9rem;font-weight:700;text-align:center;
+}
+.vc-cta:hover{background:#2fe072}
+/* portátiles de poca altura: los dos paneles de casos caben sin recortarse */
+@media(min-width:981px) and (max-height:800px){
+  .pista .casos .h2{font-size:clamp(1.7rem,3.3vw,2.5rem)}
+  .pista .casos .lead{margin-top:.5rem;font-size:.92rem;line-height:1.5}
+  .pista .casos .casos-grid{margin-top:.9rem}
+  .pista .casos .caso-art{min-height:120px;height:120px}
+  .pista .casos .caso-art.marco{height:auto}
+  .pista .casos .caso-art.marco .vp{height:92px}
+  .pista .casos .caso:hover .caso-art.marco .vp img{transform:translateY(calc(-100% + 92px))}
+}
+@media(prefers-reduced-motion:reduce){.ventana-caso[open],.ventana-caso[open]::backdrop{animation:none}}
 </style>
 </head>
 <body>
@@ -980,6 +1040,70 @@ a{color:inherit;text-decoration:none}
 </section>
 
 
+<!-- ============ PROYECTOS DIGITALES ============ -->
+<section class="seccion clara casos" id="proyectos">
+  <div class="wrap">
+    <div class="eyebrow sube-al-ver" data-decodificar>Web y sistemas</div>
+    <h2 class="h2 perspectiva">
+      <span class="rev"><span data-letras="60">Del sitio web</span></span>
+      <span class="rev"><span data-letras="280">al sistema que</span></span>
+      <span class="rev"><span><em data-grad data-letras="520">mueve el negocio</em>.</span></span>
+    </h2>
+    <p class="lead sube-al-ver">Sitios institucionales, plataformas de audio y sistemas internos hechos a la medida de cómo trabaja cada organización.</p>
+
+    <div class="casos-grid">
+      <article class="caso principal sube-al-ver">
+        <span class="lustre" aria-hidden="true"></span>
+        <div class="caso-art marco cortina">
+          <div class="chrome" aria-hidden="true"><span></span><span></span><span></span><i>uny.edu.ve</i></div>
+          <div class="vp"><img src="img/caso-uny-recorrido.webp" alt="Web oficial de la Universidad Yacambú" loading="lazy"><span class="prog" aria-hidden="true"></span></div>
+        </div>
+        <div class="caso-txt">
+          <div class="cat">Universidad · Web institucional</div>
+          <h3>Universidad Yacambú</h3>
+          <div class="logro">Web oficial con más de 100 páginas</div>
+          <p>Rediseñamos el sitio de la universidad: carreras, trámites del estudiante y notas de prensa en una web más clara y rápida, pensada también para el teléfono.</p>
+          <a class="visita" href="https://www.uny.edu.ve" target="_blank" rel="noopener">Ver el sitio
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg>
+          </a>
+        </div>
+      </article>
+
+      <article class="caso sube-al-ver">
+        <span class="lustre" aria-hidden="true"></span>
+        <div class="caso-art cortina"><img src="img/caso-uny-radio.webp" alt="Página de UNY Radio" loading="lazy"><span class="marca">UNY Radio</span></div>
+        <div class="caso-txt">
+          <div class="cat">Medios · Plataforma de audio</div>
+          <h3>UNY Radio</h3>
+          <div class="logro">La emisora de la universidad, a un clic</div>
+          <p>Una página propia para la señal en vivo y un botón dentro de la web oficial para escucharla mientras se navega.</p>
+          <a class="visita" href="https://uny-radio.vercel.app" target="_blank" rel="noopener">Escuchar la radio
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg>
+          </a>
+        </div>
+      </article>
+
+      <article class="caso caso-privado sube-al-ver">
+        <span class="lustre" aria-hidden="true"></span>
+        <div class="caso-art marco cortina">
+          <div class="chrome" aria-hidden="true"><span></span><span></span><span></span><i><svg viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 018 0v3"/></svg>Plataforma privada</i></div>
+          <div class="vp"><img src="img/caso-jac-plataforma.webp?v=2" alt="Vista de ejemplo de la plataforma de atención de Todo Para Su JAC" loading="lazy"><span class="prog" aria-hidden="true"></span></div>
+        </div>
+        <div class="caso-txt">
+          <div class="cat">Repuestos · Sistema a medida</div>
+          <h3>Todo Para Su JAC</h3>
+          <div class="logro">Una sola bandeja de WhatsApp</div>
+          <p>Un sistema con asistente inteligente para que ningún cliente quede sin respuesta ni sin seguimiento.</p>
+          <button class="visita abrir-caso" type="button" data-ventana="ventanaJac" aria-haspopup="dialog">Ver cómo lo resolvimos
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </button>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+
 <!-- ============ PROCESO ============ -->
 <section class="seccion oscura proceso" id="proceso">
   <div class="wrap">
@@ -1189,9 +1313,36 @@ a{color:inherit;text-decoration:none}
   }
 })();
 </script>
+<dialog class="ventana-caso" id="ventanaJac" aria-labelledby="vcTitulo">
+  <button class="vc-cerrar" type="button" aria-label="Cerrar"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+  <div class="vc-cuerpo">
+    <img class="vc-logo" src="img/logo-jac.webp" alt="Todo Para Su JAC" loading="lazy">
+    <div class="vc-cat">Repuestos · Sistema a medida</div>
+    <h3 id="vcTitulo">Cuando WhatsApp se queda pequeño para vender</h3>
+
+    <h4>El reto</h4>
+    <p>Tres tiendas atendiendo por WhatsApp, cada una con su propio número y unas 100 consultas por mañana. Entre tantos mensajes era fácil perder el hilo: quién escribió, qué pidió y en qué terminó.</p>
+
+    <h4>Cómo lo resolvimos</h4>
+    <ul class="vc-puntos">
+      <li><span class="vc-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12h-6l-2 3h-2l-2-3H3"/><path d="M5.5 5.5L3 12v6a2 2 0 002 2h14a2 2 0 002-2v-6l-2.5-6.5A2 2 0 0016.6 4H7.4a2 2 0 00-1.9 1.5z"/></svg></span>
+        <span><strong>Una sola bandeja</strong>Cada conversación tiene responsable y estado, y el sistema avisa si alguien se queda esperando.</span></li>
+      <li><span class="vc-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 15a2 2 0 01-2 2H8l-4 4V6a2 2 0 012-2h13a2 2 0 012 2z"/><path d="M8 10h8M8 13h5"/></svg></span>
+        <span><strong>Asistente a toda hora</strong>Entiende audios y los apodos de carros y piezas, cotiza con el catálogo y pasa el pedido a la tienda correcta.</span></li>
+      <li><span class="vc-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20h16"/><path d="M7 20v-6M12 20V6M17 20v-9"/></svg></span>
+        <span><strong>Control para la gerencia</strong>Tiempos de respuesta, desempeño y ventas. Cada tienda ve lo suyo y la gerencia lo ve todo.</span></li>
+    </ul>
+
+    <p class="vc-nota">Lo construimos a partir de más de 1.200 conversaciones reales de sus clientes. Es un sistema privado y está en implementación: la vista previa usa datos de ejemplo.</p>
+  </div>
+  <div class="vc-pie">
+    <a class="vc-cta" href="https://wa.me/584245040868?text=Hola%2C%20vi%20el%20caso%20de%20Todo%20Para%20Su%20JAC%20y%20quiero%20algo%20as%C3%AD%20para%20mi%20negocio." target="_blank" rel="noopener">Quiero algo así para mi negocio</a>
+  </div>
+</dialog>
+
 <script src="js/texto.js?v=5"></script>
-<script src="js/ui.js?v=6"></script>
-<script src="js/recorrido.js?v=5"></script>
+<script src="js/ui.js?v=7"></script>
+<script src="js/recorrido.js?v=6"></script>
 
 </body>
 </html>

@@ -139,6 +139,28 @@
     if (fondo) fondo.addEventListener("click", cerrarMenu);
   }
 
+  /* ---------- ventana de los casos privados ---------- */
+  document.querySelectorAll(".abrir-caso").forEach(function (boton) {
+    var v = document.getElementById(boton.getAttribute("data-ventana"));
+    if (!v || !v.showModal) return;
+    var cuerpo = v.querySelector(".vc-cuerpo");
+    // sin overflow:hidden en <html>: rompería el recorrido horizontal de fondo
+    function fijar(e) { if (!(cuerpo.contains(e.target) && cuerpo.scrollHeight > cuerpo.clientHeight)) e.preventDefault(); }
+    boton.addEventListener("click", function () {
+      v.showModal();
+      document.addEventListener("wheel", fijar, { passive: false });
+      document.addEventListener("touchmove", fijar, { passive: false });
+      if (window.alfaEvento) window.alfaEvento("clic_caso", { boton: "Ventana " + v.id, zona: "proyectos" });
+    });
+    v.querySelector(".vc-cerrar").addEventListener("click", function () { v.close(); });
+    v.addEventListener("close", function () {
+      document.removeEventListener("wheel", fijar);
+      document.removeEventListener("touchmove", fijar);
+    });
+    // tocar fuera del recuadro también cierra
+    v.addEventListener("click", function (e) { if (e.target === v) v.close(); });
+  });
+
   var yr = document.getElementById("yr");
   if (yr) yr.textContent = new Date().getFullYear();
 })();

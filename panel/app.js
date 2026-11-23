@@ -61,7 +61,7 @@
   var DISPOSITIVOS = { mobile: 'Teléfono', desktop: 'Computadora', tablet: 'Tableta', smart_tv: 'Televisor' };
   var RECURRENCIA = { new: 'Primera vez', returning: 'Volvieron' };
   var GENEROS = { female: 'Mujeres', male: 'Hombres' };
-  var ZONAS = { inicio: 'Portada', servicios: 'Servicios', contacto: 'Contacto', nosotros: 'Nosotros', proceso: 'Proceso', casos: 'Casos', menu: 'Menú', 'menu movil': 'Menú del teléfono', pie: 'Pie de página' };
+  var ZONAS = { inicio: 'Portada', servicios: 'Servicios', contacto: 'Contacto', nosotros: 'Nosotros', proceso: 'Proceso', casos: 'Casos', proyectos: 'Proyectos', menu: 'Menú', 'menu movil': 'Menú del teléfono', pie: 'Pie de página' };
   var DIAS = ['Dom', 'Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb'];
   var DIAS_LARGO = ['domingo', 'lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado'];
   var COLORES = ['#209ff4', '#3fc77a', '#9aa6bd', '#f2a93b', '#9b8cff', '#ff8a63'];
@@ -313,7 +313,7 @@
   function vistaInteres() {
     var a = A(); if (!a || !a.eventos) return sinGoogle();
     var ev = a.eventos.actual || {}, evp = a.eventos.anterior || {}, E = estado.datos.eventos || {};
-    var orden = ['Inicio', 'Nosotros', 'Servicios', 'Proceso', 'Casos', 'Contacto'];
+    var orden = ['Inicio', 'Nosotros', 'Servicios', 'Proceso', 'Casos', 'Proyectos', 'Contacto'];
     var secciones = (a.secciones || []).slice().sort(function (x, y) { return orden.indexOf(x.n) - orden.indexOf(y.n); });
     var html = '<div class="kpis">' + Object.keys(E).map(function (k) {
       var x = ev[k] || {}, y = evp[k] || {};

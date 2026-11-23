@@ -93,7 +93,7 @@
   }, true);
 
   // cada sección cuenta una vez por visita, cuando se ve al menos un 40 %
-  var NOMBRES = { inicio: 'Inicio', nosotros: 'Nosotros', servicios: 'Servicios', proceso: 'Proceso', casos: 'Casos', contacto: 'Contacto' };
+  var NOMBRES = { inicio: 'Inicio', nosotros: 'Nosotros', servicios: 'Servicios', proceso: 'Proceso', casos: 'Casos', proyectos: 'Proyectos', contacto: 'Contacto' };
   function observar() {
     if (!('IntersectionObserver' in window)) return;
     var vistas = {};

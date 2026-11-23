@@ -133,7 +133,7 @@
     var i = paneles.indexOf(destino);
     if (i < 0) return;
     var porPanel = (riel.offsetHeight - innerHeight) / (paneles.length - 1 || 1);
-    scrollTo({ top: riel.offsetTop + porPanel * i, behavior: "auto" });
+    scrollTo({ left: 0, top: riel.offsetTop + porPanel * i, behavior: "auto" });
   }
   addEventListener("load", function () { setTimeout(irAlAncla, 300); });
 })();
